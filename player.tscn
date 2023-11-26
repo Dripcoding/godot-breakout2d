@@ -11,6 +11,7 @@ position = Vector2(-0.000497699, 4)
 scale = Vector2(2.77783, 2)
 texture = ExtResource("1_0ecgg")
 script = ExtResource("2_oei2p")
+metadata/_edit_group_ = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
