@@ -1,6 +1,8 @@
 extends Sprite2D
 
 @export var speed:float = 400
+
+const OFFSET_X:float = 8
 var screen_size
 
 func _ready():
@@ -10,10 +12,10 @@ func _ready():
 func _process(delta):
 	var velocity = Vector2.ZERO
 
-	if (Input.is_action_pressed('move_right')):
+	if Input.is_action_pressed('move_right'):
 		print('move right')
 		velocity.x += 1
-	elif (Input.is_action_pressed('move_left')):
+	elif Input.is_action_pressed('move_left'):
 		print('move left')
 		velocity.x -= 1
 
@@ -22,5 +24,9 @@ func _process(delta):
 		
 	velocity = velocity.normalized() * speed
 	position += velocity * delta
-	# todo: use paddle width to clamp player movement
-	position = position.clamp(Vector2.ZERO, screen_size)
+
+	var playerWidth:Vector2 = $CharacterBody2D.get_node('CollisionShape2D').get('shape').get_rect().size
+	var vector_min:Vector2 = Vector2(OFFSET_X + playerWidth.x, 0)
+	var vector_max:Vector2 = Vector2(screen_size.x - playerWidth.x - OFFSET_X, screen_size.y)
+
+	position = position.clamp(vector_min, vector_max)
