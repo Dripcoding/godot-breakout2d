@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://jyti1tqjc4hc"]
+[gd_scene load_steps=3 format=3 uid="uid://jyti1tqjc4hc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3ng7d"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwijy"]
+size = Vector2(1008, 56)
 
 [node name="StaticBody2D" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_3ng7d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(494, 18)
 shape = SubResource("RectangleShape2D_hwijy")

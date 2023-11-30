@@ -9,14 +9,19 @@
 script = ExtResource("1_i8u1w")
 
 [node name="Player" parent="." instance=ExtResource("2_utlau")]
-position = Vector2(488, 228)
+position = Vector2(1758, 286)
 scale = Vector2(2.778, 2)
 
 [node name="Ball" parent="." instance=ExtResource("3_34e30")]
-position = Vector2(890, 130)
+position = Vector2(480, 527)
 
 [node name="TopBoundary" parent="." instance=ExtResource("4_wkp3w")]
+position = Vector2(11, 1)
 
 [node name="RightBoundary" parent="." instance=ExtResource("4_wkp3w")]
+position = Vector2(1014, 6)
+rotation = 1.5708
 
 [node name="LeftBoundary" parent="." instance=ExtResource("4_wkp3w")]
+position = Vector2(-3, 11)
+rotation = 1.5708
