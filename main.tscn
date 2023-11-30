@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbi1h4bkp4ask"]
+[gd_scene load_steps=5 format=3 uid="uid://dbi1h4bkp4ask"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_i8u1w"]
 [ext_resource type="PackedScene" uid="uid://qn1bm7tqvr6p" path="res://player.tscn" id="2_utlau"]
 [ext_resource type="PackedScene" uid="uid://bm7sesqo7tbli" path="res://ball.tscn" id="3_34e30"]
+[ext_resource type="PackedScene" uid="uid://jyti1tqjc4hc" path="res://TopBoundary.tscn" id="4_wkp3w"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_i8u1w")
@@ -13,3 +14,9 @@ scale = Vector2(2.778, 2)
 
 [node name="Ball" parent="." instance=ExtResource("3_34e30")]
 position = Vector2(890, 130)
+
+[node name="TopBoundary" parent="." instance=ExtResource("4_wkp3w")]
+
+[node name="RightBoundary" parent="." instance=ExtResource("4_wkp3w")]
+
+[node name="LeftBoundary" parent="." instance=ExtResource("4_wkp3w")]
