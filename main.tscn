@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_i8u1w"]
 [ext_resource type="PackedScene" uid="uid://qn1bm7tqvr6p" path="res://player.tscn" id="2_utlau"]
 [ext_resource type="PackedScene" uid="uid://bm7sesqo7tbli" path="res://ball.tscn" id="3_34e30"]
-[ext_resource type="PackedScene" uid="uid://jyti1tqjc4hc" path="res://TopBoundary.tscn" id="4_wkp3w"]
+[ext_resource type="PackedScene" uid="uid://jyti1tqjc4hc" path="res://boundary.tscn" id="4_wkp3w"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_i8u1w")
