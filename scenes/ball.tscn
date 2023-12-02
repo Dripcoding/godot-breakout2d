@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bm7sesqo7tbli"]
 
-[ext_resource type="Script" path="res://ball.gd" id="1_ce0h2"]
-[ext_resource type="Texture2D" uid="uid://br18y6qvt2ybx" path="res://ball.png" id="1_pmm1p"]
+[ext_resource type="Script" path="res://code/ball.gd" id="1_ce0h2"]
+[ext_resource type="Texture2D" uid="uid://br18y6qvt2ybx" path="res://assets/ball.png" id="2_w5ual"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_idmfa"]
 
@@ -15,7 +15,7 @@ linear_velocity = Vector2(0, -400)
 script = ExtResource("1_ce0h2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_pmm1p")
+texture = ExtResource("2_w5ual")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4ictn")
