@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7b2tymkvjg8f"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xvpnd"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e82wc"]
+
+[node name="Brick Grid" type="Node2D"]
+
+[node name="Brick" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_xvpnd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Brick"]
+shape = SubResource("RectangleShape2D_e82wc")
