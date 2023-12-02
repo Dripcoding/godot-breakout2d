@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfar26gqsb5bp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0b4c5"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3bt0"]
+size = Vector2(1000.5, 20)
+
+[node name="TopBoundary" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_0b4c5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(500, 10)
+shape = SubResource("RectangleShape2D_m3bt0")
