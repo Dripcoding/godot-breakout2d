@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbi1h4bkp4ask"]
+[gd_scene load_steps=8 format=3 uid="uid://dbi1h4bkp4ask"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_i8u1w"]
 [ext_resource type="PackedScene" uid="uid://qn1bm7tqvr6p" path="res://player.tscn" id="2_utlau"]
 [ext_resource type="PackedScene" uid="uid://bm7sesqo7tbli" path="res://ball.tscn" id="3_34e30"]
-[ext_resource type="PackedScene" uid="uid://jyti1tqjc4hc" path="res://boundary.tscn" id="4_wkp3w"]
+[ext_resource type="PackedScene" uid="uid://dfar26gqsb5bp" path="res://top_boundary.tscn" id="4_f75ow"]
+[ext_resource type="PackedScene" uid="uid://br7v03cx7yw71" path="res://right_boundary.tscn" id="5_gx52f"]
+[ext_resource type="PackedScene" uid="uid://cfcq0cgknxy7a" path="res://left_boundary.tscn" id="6_aludy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0pcjc"]
+bounce = 1.0
 
 [node name="main" type="Node"]
 script = ExtResource("1_i8u1w")
@@ -15,13 +20,15 @@ scale = Vector2(2.778, 2)
 [node name="Ball" parent="." instance=ExtResource("3_34e30")]
 position = Vector2(480, 527)
 
-[node name="TopBoundary" parent="." instance=ExtResource("4_wkp3w")]
-position = Vector2(11, 1)
+[node name="TopBoundary" parent="." instance=ExtResource("4_f75ow")]
+physics_material_override = SubResource("PhysicsMaterial_0pcjc")
+constant_linear_velocity = Vector2(0, 1)
 
-[node name="RightBoundary" parent="." instance=ExtResource("4_wkp3w")]
-position = Vector2(1014, 6)
+[node name="RightBoundary" parent="." instance=ExtResource("5_gx52f")]
+position = Vector2(983, 99)
 rotation = 1.5708
+scale = Vector2(1.01164, 0.99134)
 
-[node name="LeftBoundary" parent="." instance=ExtResource("4_wkp3w")]
-position = Vector2(-3, 11)
+[node name="LeftBoundary" parent="." instance=ExtResource("6_aludy")]
+position = Vector2(10, 20)
 rotation = 1.5708
