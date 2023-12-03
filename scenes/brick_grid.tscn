@@ -1,6 +1,5 @@
 [gd_scene load_steps=5 format=3 uid="uid://dls5q8558cvqm"]
 
-[ext_resource type="Script" path="res://scenes/brick_grid.gd" id="1_1sh5i"]
 [ext_resource type="Texture2D" path="res://assets/brick.png" id="1_yt3gw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xvpnd"]
