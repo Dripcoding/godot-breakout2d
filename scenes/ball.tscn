@@ -14,7 +14,7 @@ physics_material_override = SubResource("PhysicsMaterial_idmfa")
 gravity_scale = 0.0
 max_contacts_reported = 1
 contact_monitor = true
-linear_velocity = Vector2(0, -400)
+linear_velocity = Vector2(0, 400)
 script = ExtResource("1_ce0h2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
