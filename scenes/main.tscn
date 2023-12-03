@@ -16,8 +16,10 @@ bounce = 1.0
 script = ExtResource("1_3mcnq")
 
 [node name="Player" parent="." instance=ExtResource("2_wluck")]
-position = Vector2(501, 590)
-scale = Vector2(2.778, 2)
+unique_name_in_owner = true
+position = Vector2(500, 629)
+scale = Vector2(5.22222, 2)
+speed = null
 
 [node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
 position = Vector2(500, 550)
