@@ -9,8 +9,11 @@
 radius = 8.0
 
 [node name="Ball" type="RigidBody2D"]
+position = Vector2(-1, 2)
 physics_material_override = SubResource("PhysicsMaterial_idmfa")
 gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
 linear_velocity = Vector2(0, -400)
 script = ExtResource("1_ce0h2")
 
@@ -19,3 +22,5 @@ texture = ExtResource("2_w5ual")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4ictn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

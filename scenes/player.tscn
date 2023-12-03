@@ -8,6 +8,7 @@ size = Vector2(17.9996, 4)
 
 [node name="Player" type="Sprite2D"]
 position = Vector2(-0.000497699, 4)
+scale = Vector2(2.77783, 2)
 texture = ExtResource("1_w4g0x")
 script = ExtResource("2_oei2p")
 
