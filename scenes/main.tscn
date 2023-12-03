@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbi1h4bkp4ask"]
+[gd_scene load_steps=11 format=3 uid="uid://dbi1h4bkp4ask"]
 
 [ext_resource type="Script" path="res://code/main.gd" id="1_3mcnq"]
 [ext_resource type="PackedScene" uid="uid://qn1bm7tqvr6p" path="res://scenes/player.tscn" id="2_wluck"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://br7v03cx7yw71" path="res://scenes/right_boundary.tscn" id="5_mrj2s"]
 [ext_resource type="PackedScene" uid="uid://cfcq0cgknxy7a" path="res://scenes/left_boundary.tscn" id="6_acnk4"]
 [ext_resource type="PackedScene" uid="uid://b7b2tymkvjg8f" path="res://scenes/brick_grid.tscn" id="7_3xv8m"]
+[ext_resource type="PackedScene" uid="uid://3qjtxier3qqw" path="res://scenes/out_of_bounds_area.tscn" id="8_m6w5o"]
+[ext_resource type="Script" path="res://scenes/out_of_bounds_area.gd" id="9_1hnke"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0pcjc"]
 bounce = 1.0
@@ -18,7 +20,7 @@ script = ExtResource("1_3mcnq")
 position = Vector2(1758, 286)
 scale = Vector2(2.778, 2)
 
-[node name="Ball" parent="." instance=ExtResource("3_li5o6")]
+[node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
 position = Vector2(500, 550)
 
 [node name="TopBoundary" parent="." instance=ExtResource("4_8frh8")]
@@ -36,3 +38,10 @@ rotation = 1.5708
 
 [node name="Brick Grid" parent="." instance=ExtResource("7_3xv8m")]
 position = Vector2(60, 103)
+
+[node name="OutOfBoundsArea" parent="." instance=ExtResource("8_m6w5o")]
+unique_name_in_owner = true
+position = Vector2(32, 708)
+script = ExtResource("9_1hnke")
+
+[connection signal="body_entered" from="OutOfBoundsArea" to="OutOfBoundsArea" method="_on_body_entered"]
