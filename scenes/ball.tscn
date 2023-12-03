@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://br18y6qvt2ybx" path="res://assets/ball.png" id="2_w5ual"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_idmfa"]
+bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ictn"]
 radius = 8.0
@@ -12,9 +13,9 @@ radius = 8.0
 position = Vector2(-1, 2)
 physics_material_override = SubResource("PhysicsMaterial_idmfa")
 gravity_scale = 0.0
-max_contacts_reported = 1
+max_contacts_reported = 2
 contact_monitor = true
-linear_velocity = Vector2(0, 400)
+linear_velocity = Vector2(0, 200)
 script = ExtResource("1_ce0h2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
