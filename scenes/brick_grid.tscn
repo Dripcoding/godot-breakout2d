@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7b2tymkvjg8f"]
+[gd_scene load_steps=5 format=3 uid="uid://dls5q8558cvqm"]
 
-[ext_resource type="Texture2D" uid="uid://tgoeo732spvw" path="res://assets/brick.png" id="1_yt3gw"]
+[ext_resource type="Script" path="res://scenes/brick_grid.gd" id="1_1sh5i"]
+[ext_resource type="Texture2D" path="res://assets/brick.png" id="1_yt3gw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xvpnd"]
 bounce = 1.0
@@ -9,8 +10,10 @@ bounce = 1.0
 size = Vector2(117, 5)
 
 [node name="Brick Grid" type="Node2D"]
+script = ExtResource("1_1sh5i")
 
-[node name="Brick" type="StaticBody2D" parent="."]
+[node name="Brick" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(141, 137)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -23,7 +26,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick2" type="StaticBody2D" parent="."]
+[node name="Brick2" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(141, 159)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -36,8 +40,9 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick3" type="StaticBody2D" parent="."]
-position = Vector2(141, 179)
+[node name="Brick3" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
+position = Vector2(141, 180)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Brick3"]
@@ -49,7 +54,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick4" type="StaticBody2D" parent="."]
+[node name="Brick4" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(263, 137)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -62,7 +68,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick5" type="StaticBody2D" parent="."]
+[node name="Brick5" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(263, 159)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -75,7 +82,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick6" type="StaticBody2D" parent="."]
+[node name="Brick6" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(263, 179)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -88,7 +96,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick7" type="StaticBody2D" parent="."]
+[node name="Brick7" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(384, 137)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -101,7 +110,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick8" type="StaticBody2D" parent="."]
+[node name="Brick8" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(384, 159)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -114,7 +124,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick9" type="StaticBody2D" parent="."]
+[node name="Brick9" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(384, 179)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -127,7 +138,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick10" type="StaticBody2D" parent="."]
+[node name="Brick10" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(504, 137)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -140,7 +152,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick11" type="StaticBody2D" parent="."]
+[node name="Brick11" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(504, 159)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -153,7 +166,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick12" type="StaticBody2D" parent="."]
+[node name="Brick12" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(504, 179)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -166,7 +180,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick13" type="StaticBody2D" parent="."]
+[node name="Brick13" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(625, 137)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -179,7 +194,8 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick14" type="StaticBody2D" parent="."]
+[node name="Brick14" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
 position = Vector2(625, 159)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
@@ -192,8 +208,9 @@ position = Vector2(49.5, 0.5)
 scale = Vector2(6.5, 1.25)
 texture = ExtResource("1_yt3gw")
 
-[node name="Brick15" type="StaticBody2D" parent="."]
-position = Vector2(625, 179)
+[node name="Brick15" type="StaticBody2D" parent="." groups=["brick"]]
+unique_name_in_owner = true
+position = Vector2(625, 178)
 physics_material_override = SubResource("PhysicsMaterial_xvpnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Brick15"]
