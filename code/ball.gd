@@ -15,3 +15,5 @@ func _on_body_entered(body:Node):
 	if body.is_in_group('brick'):
 		body.queue_free()
 		collided_with_brick = true
+	elif body.is_in_group('player'):
+		print('collided with player')
