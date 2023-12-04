@@ -1,7 +1,7 @@
 extends Sprite2D
 
 
-@export var speed: float = 200
+@export var speed: float = 300
 
 @onready var player: Sprite2D = %Player
 @onready var screen_size: Vector2 = get_viewport_rect().end

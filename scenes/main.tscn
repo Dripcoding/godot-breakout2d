@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://3qjtxier3qqw" path="res://scenes/out_of_bounds_area.tscn" id="8_m6w5o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0pcjc"]
+friction = 0.0
 bounce = 1.0
 
 [node name="main" type="Node"]
@@ -19,6 +20,7 @@ script = ExtResource("1_3mcnq")
 unique_name_in_owner = true
 position = Vector2(500, 629)
 scale = Vector2(5.22222, 2)
+speed = 300.0
 
 [node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
 position = Vector2(500, 550)
