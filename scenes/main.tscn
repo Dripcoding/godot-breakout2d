@@ -20,7 +20,6 @@ script = ExtResource("1_3mcnq")
 unique_name_in_owner = true
 position = Vector2(500, 629)
 scale = Vector2(5.22222, 2)
-speed = 300.0
 
 [node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
 position = Vector2(500, 550)
