@@ -11,7 +11,6 @@ position = Vector2(7.49952, 4)
 scale = Vector2(3.61116, 2)
 texture = ExtResource("1_w4g0x")
 script = ExtResource("2_oei2p")
-speed = null
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 

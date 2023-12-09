@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://3qjtxier3qqw" path="res://scenes/out_of_bounds_area.tscn" id="8_m6w5o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0pcjc"]
+friction = 0.0
 bounce = 1.0
 
 [node name="main" type="Node"]
@@ -23,16 +24,16 @@ scale = Vector2(5.22222, 2)
 [node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
 position = Vector2(500, 550)
 
-[node name="TopBoundary" parent="." instance=ExtResource("4_8frh8")]
+[node name="TopBoundary" parent="." groups=["wall"] instance=ExtResource("4_8frh8")]
 physics_material_override = SubResource("PhysicsMaterial_0pcjc")
 constant_linear_velocity = Vector2(0, 1)
 
-[node name="RightBoundary" parent="." instance=ExtResource("5_mrj2s")]
+[node name="RightBoundary" parent="." groups=["wall"] instance=ExtResource("5_mrj2s")]
 position = Vector2(983, 98)
 rotation = 1.5708
 scale = Vector2(1.01164, 0.99134)
 
-[node name="LeftBoundary" parent="." instance=ExtResource("6_acnk4")]
+[node name="LeftBoundary" parent="." groups=["wall"] instance=ExtResource("6_acnk4")]
 position = Vector2(10, 19)
 rotation = 1.5708
 
