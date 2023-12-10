@@ -8,7 +8,6 @@ signal score
 @export var wall_collision_rotation: float = 60
 @export var normal_velocity: float = 350
 
-@onready var ball: RigidBody2D = %Ball
 
 var collided_with_brick: bool = false
 var collided_with_wall: bool = false

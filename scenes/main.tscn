@@ -65,7 +65,7 @@ offset_top = 22.0
 offset_right = 168.0
 offset_bottom = 67.0
 theme_override_font_sizes/font_size = 32
-text = "Lives: 0"
+text = "Lives: 3"
 horizontal_alignment = 1
 
 [node name="StartGameBtn" type="Button" parent="Hud"]
@@ -76,3 +76,4 @@ offset_bottom = 8.0
 [connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="OutOfBoundsArea" method="_on_body_entered"]
 [connection signal="out_of_bounds" from="OutOfBoundsArea" to="." method="_on_out_of_bounds"]
+[connection signal="out_of_bounds" from="OutOfBoundsArea" to="Hud" method="_on_out_of_bounds_area_out_of_bounds"]
