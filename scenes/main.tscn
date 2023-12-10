@@ -45,3 +45,4 @@ unique_name_in_owner = true
 position = Vector2(32, 708)
 
 [connection signal="body_entered" from="OutOfBoundsArea" to="OutOfBoundsArea" method="_on_body_entered"]
+[connection signal="out_of_bounds" from="OutOfBoundsArea" to="." method="_on_out_of_bounds"]
