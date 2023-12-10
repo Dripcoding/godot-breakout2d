@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://scenes/out_of_bounds_area.gd" id="1_wgtp6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7s4cl"]
-size = Vector2(955, 20)
+size = Vector2(958, 72)
 
 [node name="OutOfBoundsArea" type="Area2D"]
 script = ExtResource("1_wgtp6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(467.5, 0)
+position = Vector2(469, -26)
 shape = SubResource("RectangleShape2D_7s4cl")

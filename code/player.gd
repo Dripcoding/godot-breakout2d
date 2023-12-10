@@ -12,10 +12,8 @@ func _process(delta):
 	var velocity: Vector2 = Vector2.ZERO
 
 	if Input.is_action_pressed('move_right'):
-		print('move_right')
 		velocity.x += 20
 	elif Input.is_action_pressed('move_left'):
-		print('move_left')
 		velocity.x -= 20
 
 	if velocity.length() > 0:
