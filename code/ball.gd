@@ -3,6 +3,7 @@ extends RigidBody2D
 
 signal score
 
+
 @export var brick_collision_rotation: float = 60
 @export var player_collision_rotation: float = 60
 @export var wall_collision_rotation: float = 60
