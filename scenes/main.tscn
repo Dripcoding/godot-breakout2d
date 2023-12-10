@@ -74,6 +74,5 @@ offset_right = 8.0
 offset_bottom = 8.0
 
 [connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
-[connection signal="body_entered" from="OutOfBoundsArea" to="OutOfBoundsArea" method="_on_body_entered"]
-[connection signal="out_of_bounds" from="OutOfBoundsArea" to="." method="_on_out_of_bounds"]
-[connection signal="out_of_bounds" from="OutOfBoundsArea" to="Hud" method="_on_out_of_bounds_area_out_of_bounds"]
+[connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]
+[connection signal="body_entered" from="OutOfBoundsArea" to="Hud" method="_on_ball_out_of_bounds"]

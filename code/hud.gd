@@ -15,3 +15,8 @@ func _on_ball_score():
 func _on_out_of_bounds_area_out_of_bounds():
 	playerLives -= 1
 	$PlayerLivesLabel.text = 'Lives: ' + str(playerLives)
+
+
+func _on_ball_out_of_bounds(body:Node2D):
+	playerLives -= 1
+	$PlayerLivesLabel.text = 'Lives: ' + str(playerLives)	
