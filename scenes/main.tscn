@@ -73,6 +73,5 @@ unique_name_in_owner = true
 offset_right = 8.0
 offset_bottom = 8.0
 
-[connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Hud" method="_on_ball_out_of_bounds"]
