@@ -60,8 +60,13 @@ horizontal_alignment = 1
 
 [node name="PlayerLivesLabel" type="Label" parent="Hud"]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 56.0
+offset_top = 22.0
+offset_right = 168.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 32
+text = "Lives: 0"
+horizontal_alignment = 1
 
 [node name="StartGameBtn" type="Button" parent="Hud"]
 unique_name_in_owner = true
