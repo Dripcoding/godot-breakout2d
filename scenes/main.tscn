@@ -47,6 +47,7 @@ position = Vector2(32, 708)
 
 [node name="Hud" type="CanvasLayer" parent="."]
 script = ExtResource("9_bynq6")
+playerLives = null
 
 [node name="ScoreLabel" type="Label" parent="Hud"]
 unique_name_in_owner = true
@@ -73,5 +74,17 @@ unique_name_in_owner = true
 offset_right = 8.0
 offset_bottom = 8.0
 
+[node name="GameOverLabel" type="Label" parent="Hud"]
+unique_name_in_owner = true
+offset_left = 383.0
+offset_top = 29.0
+offset_right = 556.0
+offset_bottom = 74.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Game Over"
+horizontal_alignment = 1
+
+[connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Hud" method="_on_ball_out_of_bounds"]

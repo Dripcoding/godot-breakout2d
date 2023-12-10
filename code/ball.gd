@@ -1,6 +1,9 @@
 extends RigidBody2D
 
 
+signal score
+
+
 @export var brick_collision_rotation: float = 60
 @export var player_collision_rotation: float = 60
 @export var wall_collision_rotation: float = 60
@@ -33,6 +36,7 @@ func _on_body_entered(body: Node):
 	if body.is_in_group('brick'):
 		body.queue_free()
 		collided_with_brick = true
+		score.emit()
 	elif body.is_in_group('wall'):
 		collided_with_wall = true
 
