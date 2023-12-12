@@ -43,7 +43,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 
 func _on_body_entered(body: Node):
 	if body.is_in_group('brick'):
-		body.queue_free()
+		body.hide()
 		collided_with_brick = true
 		score.emit()
 	elif body.is_in_group('wall'):
@@ -54,7 +54,6 @@ func _on_ball_out_of_bounds(body: Node2D):
 
 
 func on_game_over():
-	print('game over')
 	game_over = true
 	position.x = position_x_initial
 	position.y = position_y_initial
