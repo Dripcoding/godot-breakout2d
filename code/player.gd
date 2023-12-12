@@ -2,11 +2,14 @@ extends Sprite2D
 
 
 @export var speed: float = 300
+@export var position_x_initial: float = 500
+@export var position_y_initial: float = 629
 
 @onready var player: Sprite2D = %Player
 @onready var screen_size: Vector2 = get_viewport_rect().end
 
 const X_OFFSET = 70
+
 
 func _process(delta):
 	var velocity: Vector2 = Vector2.ZERO
@@ -26,3 +29,8 @@ func _process(delta):
 	
 	# prevent player from going past left and right boundaries 
 	position = position.clamp(min_vector, max_vector)
+
+
+func on_game_over():
+	position.x = position_x_initial
+	position.y = position_y_initial
