@@ -8,11 +8,15 @@ signal score
 @export var player_collision_rotation: float = 60
 @export var wall_collision_rotation: float = 60
 @export var normal_velocity: float = 350
+@export var position_x_initial: float = 499
+@export var position_y_initial: float = 500
 
 
 var collided_with_brick: bool = false
 var collided_with_wall: bool = false
 var is_out_of_bounds: bool = false
+var game_over: bool = false
+
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if collided_with_brick:
@@ -24,17 +28,22 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		var rotation_radian = deg_to_rad(wall_collision_rotation)
 		state.apply_impulse(state.linear_velocity.rotated(rotation_radian))
 	elif is_out_of_bounds:
-		position.x = 499
-		position.y = 500
-		linear_velocity.x = 0
-		linear_velocity.y = 350
+		position.x = position_x_initial
+		position.y = position_y_initial
+		linear_velocity.x = Vector2.ZERO.x
+		linear_velocity.y = normal_velocity
 		is_out_of_bounds = false
+	elif game_over:
+		position.x = position_x_initial
+		position.y = position_y_initial
+		linear_velocity = Vector2.ZERO
 	else:
 		state.linear_velocity = state.linear_velocity.normalized() * normal_velocity
 
+
 func _on_body_entered(body: Node):
 	if body.is_in_group('brick'):
-		body.queue_free()
+		body.hide()
 		collided_with_brick = true
 		score.emit()
 	elif body.is_in_group('wall'):
@@ -42,3 +51,10 @@ func _on_body_entered(body: Node):
 
 func _on_ball_out_of_bounds(body: Node2D):
 	is_out_of_bounds = true
+
+
+func on_game_over():
+	game_over = true
+	position.x = position_x_initial
+	position.y = position_y_initial
+	linear_velocity = Vector2.ZERO

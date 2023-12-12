@@ -1,5 +1,5 @@
 extends Node
 
 
-func _on_out_of_bounds():
-	print('main sees ball out of bounds')
+func _on_game_over():
+	propagate_call('on_game_over')
