@@ -39,7 +39,8 @@ scale = Vector2(1.01164, 0.99134)
 position = Vector2(10, 19)
 rotation = 1.5708
 
-[node name="Brick Grid" parent="." instance=ExtResource("7_3xv8m")]
+[node name="BrickGrid" parent="." instance=ExtResource("7_3xv8m")]
+unique_name_in_owner = true
 position = Vector2(60, 103)
 script = ExtResource("8_jo2sc")
 
