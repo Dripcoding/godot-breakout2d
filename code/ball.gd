@@ -18,6 +18,7 @@ var is_out_of_bounds: bool = false
 var game_over: bool = false
 var game_paused: bool = false
 var game_resumed: bool = false
+var game_quit: bool = false
 var previous_velocity: Vector2 = Vector2.ZERO
 
 
@@ -36,10 +37,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		position.y = position_y_initial
 		linear_velocity.x = Vector2.ZERO.x
 		linear_velocity.y = normal_velocity
-	elif game_over:
-		position.x = position_x_initial
-		position.y = position_y_initial
-		linear_velocity = Vector2.ZERO
+	elif game_over || game_quit:
+		reset()
 	elif game_resumed:
 		game_paused = false
 		game_resumed = false
@@ -77,3 +76,14 @@ func pause():
 
 func resume():
 	game_resumed = true
+
+
+func quit():
+	game_quit = true
+	reset()	
+
+
+func reset():
+	position.x = position_x_initial
+	position.y = position_y_initial
+	linear_velocity = Vector2.ZERO

@@ -6,6 +6,8 @@ func _process(delta):
 		pause_game()
 	elif Input.is_action_just_pressed('resume'):
 		resume_game()
+	elif Input.is_action_just_pressed('quit'):
+		quit_game()
 
 
 func pause_game():
@@ -13,8 +15,11 @@ func pause_game():
 
 
 func resume_game():
-	print('resume_game')
 	propagate_call('resume')
+
+
+func quit_game():
+	propagate_call('quit')
 
 
 func _on_game_over():
