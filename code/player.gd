@@ -11,10 +11,15 @@ extends Sprite2D
 const X_OFFSET = 70
 
 
+var pause_game: bool = false
+
+
 func _process(delta):
 	var velocity: Vector2 = Vector2.ZERO
 
-	if Input.is_action_pressed('move_right'):
+	if pause_game:
+		return
+	elif Input.is_action_pressed('move_right'):
 		velocity.x += 20
 	elif Input.is_action_pressed('move_left'):
 		velocity.x -= 20
@@ -34,3 +39,7 @@ func _process(delta):
 func on_game_over():
 	position.x = position_x_initial
 	position.y = position_y_initial
+
+
+func pause():
+	pause_game = true 

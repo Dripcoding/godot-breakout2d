@@ -16,6 +16,7 @@ var collided_with_brick: bool = false
 var collided_with_wall: bool = false
 var is_out_of_bounds: bool = false
 var game_over: bool = false
+var game_paused: bool = false
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
@@ -28,14 +29,17 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		var rotation_radian = deg_to_rad(wall_collision_rotation)
 		state.apply_impulse(state.linear_velocity.rotated(rotation_radian))
 	elif is_out_of_bounds:
+		is_out_of_bounds = false
 		position.x = position_x_initial
 		position.y = position_y_initial
 		linear_velocity.x = Vector2.ZERO.x
 		linear_velocity.y = normal_velocity
-		is_out_of_bounds = false
 	elif game_over:
 		position.x = position_x_initial
 		position.y = position_y_initial
+		linear_velocity = Vector2.ZERO
+	elif game_paused:
+		game_paused = false
 		linear_velocity = Vector2.ZERO
 	else:
 		state.linear_velocity = state.linear_velocity.normalized() * normal_velocity
@@ -49,6 +53,7 @@ func _on_body_entered(body: Node):
 	elif body.is_in_group('wall'):
 		collided_with_wall = true
 
+
 func _on_ball_out_of_bounds(body: Node2D):
 	is_out_of_bounds = true
 
@@ -57,4 +62,9 @@ func on_game_over():
 	game_over = true
 	position.x = position_x_initial
 	position.y = position_y_initial
+	linear_velocity = Vector2.ZERO
+
+
+func pause():
+	game_paused = true
 	linear_velocity = Vector2.ZERO
