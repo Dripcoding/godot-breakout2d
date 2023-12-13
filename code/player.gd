@@ -43,3 +43,7 @@ func on_game_over():
 
 func pause():
 	pause_game = true 
+
+
+func resume():
+	pause_game = false

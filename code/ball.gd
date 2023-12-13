@@ -17,6 +17,8 @@ var collided_with_wall: bool = false
 var is_out_of_bounds: bool = false
 var game_over: bool = false
 var game_paused: bool = false
+var game_resumed: bool = false
+var previous_velocity: Vector2 = Vector2.ZERO
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
@@ -38,9 +40,14 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		position.x = position_x_initial
 		position.y = position_y_initial
 		linear_velocity = Vector2.ZERO
-	elif game_paused:
+	elif game_paused and linear_velocity != Vector2.ZERO:
 		game_paused = false
+		previous_velocity = linear_velocity
 		linear_velocity = Vector2.ZERO
+	elif game_resumed:
+		game_paused = false # todo: debug this
+		game_resumed = false
+		linear_velocity = previous_velocity	
 	else:
 		state.linear_velocity = state.linear_velocity.normalized() * normal_velocity
 
@@ -67,4 +74,8 @@ func on_game_over():
 
 func pause():
 	game_paused = true
-	linear_velocity = Vector2.ZERO
+
+
+func resume():
+	# game_paused = false
+	game_resumed = true
