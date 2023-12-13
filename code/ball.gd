@@ -76,5 +76,4 @@ func pause():
 
 
 func resume():
-	# game_paused = false
 	game_resumed = true
