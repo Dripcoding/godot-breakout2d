@@ -87,6 +87,15 @@ theme_override_font_sizes/font_size = 32
 text = "Game Over"
 horizontal_alignment = 1
 
+[node name="Button" type="Button" parent="Hud"]
+unique_name_in_owner = true
+offset_left = 356.0
+offset_top = 381.0
+offset_right = 629.0
+offset_bottom = 441.0
+theme_override_font_sizes/font_size = 32
+text = "Start Game"
+
 [connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Hud" method="_on_ball_out_of_bounds"]
