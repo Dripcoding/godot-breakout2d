@@ -40,14 +40,13 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		position.x = position_x_initial
 		position.y = position_y_initial
 		linear_velocity = Vector2.ZERO
-	elif game_paused and linear_velocity != Vector2.ZERO:
-		game_paused = false
-		previous_velocity = linear_velocity
-		linear_velocity = Vector2.ZERO
 	elif game_resumed:
-		game_paused = false # todo: debug this
+		game_paused = false
 		game_resumed = false
 		linear_velocity = previous_velocity	
+	elif game_paused and linear_velocity != Vector2.ZERO:
+		previous_velocity = linear_velocity
+		linear_velocity = Vector2.ZERO
 	else:
 		state.linear_velocity = state.linear_velocity.normalized() * normal_velocity
 
