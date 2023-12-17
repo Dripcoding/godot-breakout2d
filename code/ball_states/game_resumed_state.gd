@@ -1,5 +1,5 @@
 class_name GameResumedState
 
 
-func handle_physics(ball: Ball, previous: Vector2) -> void:
-	ball.linear_velocity = previous
+func handle_physics(state: PhysicsDirectBodyState2D, previous: Vector2) -> void:
+	state.linear_velocity = previous

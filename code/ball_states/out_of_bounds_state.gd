@@ -22,11 +22,11 @@ func _init(
 	ball_normal_velocity_y = normal_velocity
 
 
-func handle_physics(ball: Ball) -> void:
+func handle_physics(state: PhysicsDirectBodyState2D, ball: Ball) -> void:
 	ball.position.x = get_ball_position_x_init()
 	ball.position.y = get_ball_position_y_init()
-	ball.linear_velocity.x = Vector2.ZERO.x
-	ball.linear_velocity.y = get_ball_normal_velocity_y()
+	state.linear_velocity.x = Vector2.ZERO.x
+	state.linear_velocity.y = get_ball_normal_velocity_y()
 
 
 func get_ball_position() -> Vector2:
