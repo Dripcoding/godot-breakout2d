@@ -12,8 +12,9 @@ signal score
 @export var position_y_initial: float = 500
 
 
-var collided_with_brick_state = preload("res://code/ball_states/collided_with_brick_state.gd")
-var collided_with_wall_state = preload("res://code/ball_states/collided_with_wall_state.gd")
+var collided_with_brick_resource: Resource = preload("res://code/ball_states/collided_with_brick_state.gd")
+var collided_with_wall_resource: Resource = preload("res://code/ball_states/collided_with_wall_state.gd")
+var out_of_bounds_resource: Resource = preload("res://code/ball_states/out_of_bounds_state.gd")		
 
 
 var collided_with_brick: bool = false
@@ -27,8 +28,15 @@ var previous_velocity: Vector2 = Vector2.ZERO
 
 
 var ball_state
-var brick_state = collided_with_brick_state.new(brick_collision_rotation)
-var wall_state = collided_with_wall_state.new(wall_collision_rotation)
+var brick_state = collided_with_brick_resource.new(brick_collision_rotation)
+var wall_state = collided_with_wall_resource.new(wall_collision_rotation)
+var out_of_bounds_state = out_of_bounds_resource.new(
+	position,
+	position_x_initial,
+	position_y_initial,
+	linear_velocity,
+	normal_velocity
+)
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
@@ -43,10 +51,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			ball_state.handle_physics(state)
 		elif is_out_of_bounds:
 			is_out_of_bounds = false
-			position.x = position_x_initial
-			position.y = position_y_initial
-			linear_velocity.x = Vector2.ZERO.x
-			linear_velocity.y = normal_velocity
+			out_of_bounds_state.handle_physics(self)
 		elif game_over || game_quit:
 			reset()
 		elif game_resumed:
@@ -60,7 +65,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			state.linear_velocity = state.linear_velocity.normalized() * normal_velocity
 
 
-func _on_body_entered(body: Node):
+func _on_body_entered(body: Node) -> void:
 	if body.is_in_group('brick'):
 		body.hide()
 		collided_with_brick = true
@@ -70,31 +75,33 @@ func _on_body_entered(body: Node):
 		collided_with_wall = true
 		set_state(wall_state)
 
-func _on_ball_out_of_bounds(body: Node2D):
+
+func _on_ball_out_of_bounds(body: Node2D) -> void:
 	is_out_of_bounds = true
+	set_state(out_of_bounds_state)
 
 
-func on_game_over():
+func on_game_over() -> void:
 	game_over = true
 	position.x = position_x_initial
 	position.y = position_y_initial
 	linear_velocity = Vector2.ZERO
 
 
-func pause():
+func pause() -> void:
 	game_paused = true
 
 
-func resume():
+func resume() -> void:
 	game_resumed = true
 
 
-func quit():
+func quit() -> void:
 	game_quit = true
 	reset()	
 
 
-func reset():
+func reset() -> void:
 	position.x = position_x_initial
 	position.y = position_y_initial
 	linear_velocity = Vector2.ZERO

@@ -8,7 +8,7 @@ var ball_linear_velocity: Vector2
 var ball_normal_velocity_y: float
 
 
-func _int(
+func _init(
 	position: Vector2,
 	position_x_init: float,
 	position_y_init: float,
@@ -22,8 +22,28 @@ func _int(
 	ball_normal_velocity_y = normal_velocity
 
 
-func handle_physics() -> void:
-	ball_position.x = ball_position_x_init
-	ball_position.y = ball_position_y_init
-	ball_linear_velocity.x = Vector2.ZERO.x
-	ball_linear_velocity.y = ball_normal_velocity_y
+func handle_physics(ball: Ball) -> void:
+	ball.position.x = get_ball_position_x_init()
+	ball.position.y = get_ball_position_y_init()
+	ball.linear_velocity.x = Vector2.ZERO.x
+	ball.linear_velocity.y = get_ball_normal_velocity_y()
+
+
+func get_ball_position() -> Vector2:
+	return ball_position
+
+
+func get_ball_position_x_init() -> float:
+	return ball_position_x_init
+
+
+func get_ball_position_y_init() -> float:
+	return ball_position_y_init
+
+
+func get_ball_linear_velocity() -> Vector2:
+	return ball_linear_velocity
+
+
+func get_ball_normal_velocity_y() -> float:	
+	return ball_normal_velocity_y
