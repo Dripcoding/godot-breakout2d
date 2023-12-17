@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm7sesqo7tbli"]
+[gd_scene load_steps=4 format=3 uid="uid://bm7sesqo7tbli"]
 
-[ext_resource type="Script" path="res://code/ball.gd" id="1_ce0h2"]
 [ext_resource type="Texture2D" uid="uid://br18y6qvt2ybx" path="res://assets/ball.png" id="2_w5ual"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_idmfa"]
@@ -11,13 +10,12 @@ bounce = 1.0
 radius = 8.0
 
 [node name="Ball" type="RigidBody2D"]
-position = Vector2(-1, 2)
+position = Vector2(-11, 2)
 physics_material_override = SubResource("PhysicsMaterial_idmfa")
 gravity_scale = 0.0
 max_contacts_reported = 1
 contact_monitor = true
 linear_velocity = Vector2(0, 350)
-script = ExtResource("1_ce0h2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_w5ual")
