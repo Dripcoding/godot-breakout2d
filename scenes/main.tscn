@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbi1h4bkp4ask"]
+[gd_scene load_steps=13 format=3 uid="uid://dbi1h4bkp4ask"]
 
 [ext_resource type="Script" path="res://code/main.gd" id="1_3mcnq"]
 [ext_resource type="PackedScene" uid="uid://qn1bm7tqvr6p" path="res://scenes/player.tscn" id="2_wluck"]
 [ext_resource type="PackedScene" uid="uid://bm7sesqo7tbli" path="res://scenes/ball.tscn" id="3_li5o6"]
 [ext_resource type="PackedScene" uid="uid://dfar26gqsb5bp" path="res://scenes/top_boundary.tscn" id="4_8frh8"]
+[ext_resource type="Script" path="res://code/ball.gd" id="4_70wbh"]
 [ext_resource type="PackedScene" uid="uid://br7v03cx7yw71" path="res://scenes/right_boundary.tscn" id="5_mrj2s"]
 [ext_resource type="PackedScene" uid="uid://cfcq0cgknxy7a" path="res://scenes/left_boundary.tscn" id="6_acnk4"]
 [ext_resource type="PackedScene" uid="uid://dls5q8558cvqm" path="res://scenes/brick_grid.tscn" id="7_3xv8m"]
@@ -24,7 +25,9 @@ position = Vector2(500, 629)
 scale = Vector2(5.22222, 2)
 
 [node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
+unique_name_in_owner = true
 position = Vector2(499, 550)
+script = ExtResource("4_70wbh")
 
 [node name="TopBoundary" parent="." groups=["wall"] instance=ExtResource("4_8frh8")]
 physics_material_override = SubResource("PhysicsMaterial_0pcjc")
