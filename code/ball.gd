@@ -17,6 +17,7 @@ var collided_with_wall_resource: Resource = preload("res://code/ball_states/coll
 var out_of_bounds_resource: Resource = preload("res://code/ball_states/out_of_bounds_state.gd")		
 var game_resumed_resource: Resource = preload("res://code/ball_states/game_resumed_state.gd")
 var game_paused_resource: Resource = preload("res://code/ball_states/game_paused_state.gd")
+var game_ready_resource: Resource = preload("res://code/ball_states/game_ready_state.gd")
 
 
 var collided_with_brick: bool = false
@@ -41,33 +42,33 @@ var out_of_bounds_state = out_of_bounds_resource.new(
 )
 var game_resumed_state = game_resumed_resource.new()
 var game_paused_state = game_paused_resource.new()
+var game_ready_state = game_ready_resource.new()
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	# ball_state.handle_physics(state)
 
 	if ball_state != null:
-		if collided_with_brick:
+		if collided_with_brick && ball_state is CollidedWithBrickState:
 			collided_with_brick = false
 			ball_state.handle_physics(state)
-		elif collided_with_wall:
+		elif collided_with_wall && ball_state is CollidedWithWallState:
 			collided_with_wall = false
 			ball_state.handle_physics(state)
-		elif is_out_of_bounds:
+		elif is_out_of_bounds && ball_state is OutOfBoundsState:
 			is_out_of_bounds = false
 			ball_state.handle_physics(self)
 		elif game_over || game_quit:
 			reset()
-		elif game_resumed:
+		elif game_resumed && ball_state is GameResumedState:
 			game_paused = false
 			game_resumed = false
 			ball_state.handle_physics(self, previous_velocity)
-		elif game_paused and linear_velocity != Vector2.ZERO:
-			# previous_velocity = linear_velocity
+		elif game_paused and linear_velocity != Vector2.ZERO && ball_state is GamePausedState:
 			ball_state.handle_physics(self)
-		else:
-			state.linear_velocity = state.linear_velocity.normalized() * normal_velocity
-
+		else:	
+			ball_state.handle_physics(state, normal_velocity)
+		set_state(game_ready_state)
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group('brick'):
