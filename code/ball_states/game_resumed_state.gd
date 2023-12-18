@@ -1,5 +1,16 @@
 class_name GameResumedState
 
 
-func handle_physics(state: PhysicsDirectBodyState2D, previous: Vector2) -> void:
-	state.linear_velocity = previous
+var ball_context: Ball
+
+
+func _init(ball: Ball) -> void:
+	ball_context = ball
+
+
+func handle_physics(state: PhysicsDirectBodyState2D) -> void:
+	state.linear_velocity = get_ball_context().get_previous_velocity()
+
+
+func get_ball_context() -> Ball:
+	return ball_context

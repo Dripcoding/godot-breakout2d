@@ -32,31 +32,20 @@ var out_of_bounds_state = out_of_bounds_resource.new(
 	position_x_initial,
 	position_y_initial,
 	linear_velocity,
-	normal_velocity
+	normal_velocity,
+	self
 )
-var game_resumed_state = game_resumed_resource.new()
-var game_paused_state = game_paused_resource.new()
-var game_ready_state = game_ready_resource.new()
-var game_terminal_state = game_terminal_resource.new(position_x_initial, position_y_initial)
+var game_resumed_state = game_resumed_resource.new(self)
+var game_paused_state = game_paused_resource.new(self)
+var game_ready_state = game_ready_resource.new(normal_velocity)
+var game_terminal_state = game_terminal_resource.new(position_x_initial, position_y_initial, self)
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if !ball_state:
 		return
-	if ball_state is CollidedWithBrickState:
-		ball_state.handle_physics(state)
-	elif ball_state is CollidedWithWallState:
-		ball_state.handle_physics(state)
-	elif ball_state is OutOfBoundsState:
-		ball_state.handle_physics(state, self)
-	elif ball_state is GameTerminalState:
-		ball_state.handle_physics(state, self)
-	elif ball_state is GameResumedState:
-		ball_state.handle_physics(state, previous_velocity)
-	elif ball_state is GamePausedState:
-		ball_state.handle_physics(self, state)
-	else:	
-		ball_state.handle_physics(state, normal_velocity)
+	
+	ball_state.handle_physics(state)
 	set_state(game_ready_state)
 
 
@@ -95,3 +84,7 @@ func set_state(newState) -> void:
 
 func set_previous_velocity(newVelocity: Vector2) -> void:
 	previous_velocity = newVelocity
+
+
+func get_previous_velocity() -> Vector2:
+	return previous_velocity
