@@ -6,6 +6,7 @@ var ball_position_x_init: float
 var ball_position_y_init: float
 var ball_linear_velocity: Vector2
 var ball_normal_velocity_y: float
+var ball_context: Ball
 
 
 func _init(
@@ -13,18 +14,21 @@ func _init(
 	position_x_init: float,
 	position_y_init: float,
 	linear_velocity: Vector2,
-	normal_velocity: float
+	normal_velocity: float,
+	ball: Ball
 ) -> void:
 	ball_position = position
 	ball_position_x_init = position_x_init
 	ball_position_y_init = position_y_init
 	ball_linear_velocity = linear_velocity
 	ball_normal_velocity_y = normal_velocity
+	ball_context = ball
 
 
-func handle_physics(state: PhysicsDirectBodyState2D, ball: Ball) -> void:
-	ball.position.x = get_ball_position_x_init()
-	ball.position.y = get_ball_position_y_init()
+func handle_physics(state: PhysicsDirectBodyState2D) -> void:
+	var context = get_ball_context()
+	context.position.x = get_ball_position_x_init()
+	context.position.y = get_ball_position_y_init()
 	state.linear_velocity.x = Vector2.ZERO.x
 	state.linear_velocity.y = get_ball_normal_velocity_y()
 
@@ -47,3 +51,7 @@ func get_ball_linear_velocity() -> Vector2:
 
 func get_ball_normal_velocity_y() -> float:	
 	return ball_normal_velocity_y
+
+
+func get_ball_context() -> Ball:
+	return ball_context
