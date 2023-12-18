@@ -16,13 +16,13 @@ var previous_velocity: Vector2 = Vector2.ZERO
 var ball_state
 
 
-var collided_with_brick_resource: Resource = preload("res://code/ball_states/collided_with_brick_state.gd")
-var collided_with_wall_resource: Resource = preload("res://code/ball_states/collided_with_wall_state.gd")
-var out_of_bounds_resource: Resource = preload("res://code/ball_states/out_of_bounds_state.gd")		
-var game_resumed_resource: Resource = preload("res://code/ball_states/game_resumed_state.gd")
-var game_paused_resource: Resource = preload("res://code/ball_states/game_paused_state.gd")
-var game_ready_resource: Resource = preload("res://code/ball_states/game_ready_state.gd")
-var game_terminal_resource: Resource = preload("res://code/ball_states/game_terminal_state.gd")
+const collided_with_brick_resource: Resource = preload("res://code/ball_states/collided_with_brick_state.gd")
+const collided_with_wall_resource: Resource = preload("res://code/ball_states/collided_with_wall_state.gd")
+const out_of_bounds_resource: Resource = preload("res://code/ball_states/out_of_bounds_state.gd")		
+const game_resumed_resource: Resource = preload("res://code/ball_states/game_resumed_state.gd")
+const game_paused_resource: Resource = preload("res://code/ball_states/game_paused_state.gd")
+const game_ready_resource: Resource = preload("res://code/ball_states/game_ready_state.gd")
+const game_terminal_resource: Resource = preload("res://code/ball_states/game_terminal_state.gd")
 
 
 var brick_state = collided_with_brick_resource.new(brick_collision_rotation)
