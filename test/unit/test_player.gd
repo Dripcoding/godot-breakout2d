@@ -19,6 +19,23 @@ func test_player_exists():
     assert_not_null(player, "Player does not exist")
 
 
+func test_player_has_correct_children():
+    var player = get_node("Player")
+    
+    # collisionShape2d
+    var collision_shape_2d = player.get_node("collisionShape2d")
+    assert_true(collision_shape_2d is CollisionShape2D, "Player does not have collisionShape2d child")
+    assert_true(collision_shape_2d.shape is RectangleShape2D, "Player collisionShape2d child does not have RectangleShape2D shape")
+    assert_true(collision_shape_2d.shape.disabled == false, "Player collisionShape2d child shape is disabled")
+    assert_true(collision_shape_2d.visible == true, "Player collisionShape2d child is not visible")
+
+    # sprite2d
+    var sprite_2d = player.get_node("sprite2d")
+    assert_true(sprite_2d is Sprite2D, "Player does not have sprite2d child")
+    assert_true(sprite_2d.texture is Texture, "Player sprite2d child does not have Texture texture")
+    assert_true(sprite_2d.visible == true, "Player sprite2d child texture is not visible")
+
+
 func test_player_initial_position():
     var player = get_node("Player")
     var expected_position = Vector2(player.position_x_initial, player.position_y_initial)
@@ -55,6 +72,7 @@ func test_player_moved_left():
     player._process(1)  # Simulate 1 second of game time
     var final_position = player.position
     assert_true(final_position.x < initial_position.x, "Player did not move left")
+
 
 func test_player_pause():
     var player = get_node("Player")

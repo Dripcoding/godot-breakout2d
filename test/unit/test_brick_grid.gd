@@ -41,15 +41,15 @@ func test_brick_grid_has_correct_children():
 		assert_true(brick.unique_name_in_owner == true, "Brick does not have a unique name in owner")
 
 		# assert collisionShape2d child properties
-		var collisionShape2d = brick.get_child(0)
-		assert_true(collisionShape2d.get_shape() is RectangleShape2D, "Brick does not have a rectangle shape")
-		assert_true(collisionShape2d is CollisionShape2D, "Brick does not have a CollisionShape2D child")
-		assert_true(collisionShape2d.disabled == false, "CollisionShape2d is disabled")
-		assert_true(collisionShape2d.visible == true, "CollisionShape2d is not visible")
+		var collision_shape_2d = brick.get_child(0)
+		assert_true(collision_shape_2d.get_shape() is RectangleShape2D, "Brick does not have a rectangle shape")
+		assert_true(collision_shape_2d is CollisionShape2D, "Brick does not have a CollisionShape2d child")
+		assert_true(collision_shape_2d.disabled == false, "CollisionShape2d is disabled")
+		assert_true(collision_shape_2d.visible == true, "CollisionShape2d is not visible")
 
 		# assert sprite2d child properties
-		var sprite2d = brick.get_child(1)
-		assert_true(sprite2d is Sprite2D, "Brick is not a Sprite2D child")
-		assert_true(sprite2d.visible == true, "Sprite2D is not visible")	
-		assert_true(sprite2d.texture is Texture, "Sprite2D does not have a texture")
+		var sprite_2d = brick.get_child(1)
+		assert_true(sprite_2d is Sprite2D, "Brick is not a Sprite2D child")
+		assert_true(sprite_2d.visible == true, "Sprite2D is not visible")	
+		assert_true(sprite_2d.texture is Texture, "Sprite2D does not have a texture")
 		
