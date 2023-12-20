@@ -14,6 +14,11 @@ const X_OFFSET: float = 70
 var pause_game: bool = false
 
 
+func _ready() -> void:
+	position.x = position_x_initial
+	position.y = position_y_initial
+
+
 func _process(delta) -> void:
 	var velocity: Vector2 = Vector2.ZERO
 
