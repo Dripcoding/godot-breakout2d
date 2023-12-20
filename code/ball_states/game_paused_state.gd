@@ -1,9 +1,20 @@
 class_name GamePausedState
 
 
-func handle_physics(ball: Ball, state: PhysicsDirectBodyState2D):
+var ball_context: Ball
+
+
+func _init(ball: Ball) -> void:
+	ball_context = ball
+
+
+func handle_physics(state: PhysicsDirectBodyState2D) -> void:
+	var context = get_ball_context()
 	if state.linear_velocity != Vector2.ZERO:
-		ball.set_previous_velocity(ball.linear_velocity)
+		context.set_previous_velocity(state.linear_velocity)
 
 	state.linear_velocity = Vector2.ZERO
 
+
+func get_ball_context() -> Ball:
+	return ball_context

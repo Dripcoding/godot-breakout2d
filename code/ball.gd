@@ -25,44 +25,33 @@ const game_ready_resource: Resource = preload("res://code/ball_states/game_ready
 const game_terminal_resource: Resource = preload("res://code/ball_states/game_terminal_state.gd")
 
 
-var brick_state = collided_with_brick_resource.new(brick_collision_rotation)
-var wall_state = collided_with_wall_resource.new(wall_collision_rotation)
-var out_of_bounds_state = out_of_bounds_resource.new(
+var brick_state: CollidedWithBrickState = collided_with_brick_resource.new(brick_collision_rotation)
+var wall_state: CollidedWithWallState = collided_with_wall_resource.new(wall_collision_rotation)
+var out_of_bounds_state: OutOfBoundsState = out_of_bounds_resource.new(
 	position,
 	position_x_initial,
 	position_y_initial,
 	linear_velocity,
-	normal_velocity
+	normal_velocity,
+	self
 )
-var game_resumed_state = game_resumed_resource.new()
-var game_paused_state = game_paused_resource.new()
-var game_ready_state = game_ready_resource.new()
-var game_terminal_state = game_terminal_resource.new(position_x_initial, position_y_initial)
+var game_resumed_state: GameResumedState = game_resumed_resource.new(self)
+var game_paused_state: GamePausedState = game_paused_resource.new(self)
+var game_ready_state: GameReadyState = game_ready_resource.new(normal_velocity)
+var game_terminal_state: GameTerminalState = game_terminal_resource.new(position_x_initial, position_y_initial, self)
 
 
-func _integrate_forces(state: PhysicsDirectBodyState2D):
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if !ball_state:
 		return
-	if ball_state is CollidedWithBrickState:
-		ball_state.handle_physics(state)
-	elif ball_state is CollidedWithWallState:
-		ball_state.handle_physics(state)
-	elif ball_state is OutOfBoundsState:
-		ball_state.handle_physics(state, self)
-	elif ball_state is GameTerminalState:
-		ball_state.handle_physics(state, self)
-	elif ball_state is GameResumedState:
-		ball_state.handle_physics(state, previous_velocity)
-	elif ball_state is GamePausedState:
-		ball_state.handle_physics(self, state)
-	else:	
-		ball_state.handle_physics(state, normal_velocity)
+	
+	ball_state.handle_physics(state)
 	set_state(game_ready_state)
 
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group('brick'):
-		body.hide()
+		body.queue_free()
 		score.emit()
 		set_state(brick_state)
 	elif body.is_in_group('wall'):
@@ -95,3 +84,7 @@ func set_state(newState) -> void:
 
 func set_previous_velocity(newVelocity: Vector2) -> void:
 	previous_velocity = newVelocity
+
+
+func get_previous_velocity() -> Vector2:
+	return previous_velocity

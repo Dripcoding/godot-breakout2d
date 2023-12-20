@@ -8,13 +8,13 @@ extends Sprite2D
 @onready var player: Sprite2D = %Player
 @onready var screen_size: Vector2 = get_viewport_rect().end
 
-const X_OFFSET = 70
+const X_OFFSET: float = 70
 
 
 var pause_game: bool = false
 
 
-func _process(delta):
+func _process(delta) -> void:
 	var velocity: Vector2 = Vector2.ZERO
 
 	if pause_game:
@@ -36,14 +36,14 @@ func _process(delta):
 	position = position.clamp(min_vector, max_vector)
 
 
-func on_game_over():
+func on_game_over() -> void:
 	position.x = position_x_initial
 	position.y = position_y_initial
 
 
-func pause():
+func pause() -> void:
 	pause_game = true 
 
 
-func resume():
+func resume() -> void:
 	pause_game = false
