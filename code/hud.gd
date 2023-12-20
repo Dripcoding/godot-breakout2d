@@ -10,16 +10,16 @@ signal game_over
 var score: int = 0
 
 
-func _ready():
+func _ready() -> void:
 	$GameOverLabel.hide()
 
 
-func _on_ball_score():
+func _on_ball_score() -> void:
 	score += 1
 	$ScoreLabel.text = 'Score: ' + str(score)
 
 
-func _on_ball_out_of_bounds(body:Node2D):
+func _on_ball_out_of_bounds(body:Node2D) -> void:
 	playerLives -= 1
 	$PlayerLivesLabel.text = 'Lives: ' + str(playerLives)
 
@@ -27,6 +27,6 @@ func _on_ball_out_of_bounds(body:Node2D):
 		game_over.emit()
 
 
-func _on_game_over():
+func _on_game_over() -> void:
 	$GameOverLabel.show()
 	$ScoreLabel.text = 'Score: 0'
