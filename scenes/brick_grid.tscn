@@ -9,7 +9,7 @@ bounce = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e82wc"]
 size = Vector2(117, 5)
 
-[node name="Brick Grid" type="Node2D"]
+[node name="BrickGrid" type="Node2D"]
 
 [node name="Brick" type="StaticBody2D" parent="." groups=["brick"]]
 unique_name_in_owner = true

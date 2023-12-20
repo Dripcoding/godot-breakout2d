@@ -1,4 +1,5 @@
 {
 	"dirs": ["res://test/unit/", "res://test/integration/"],
-	"prefix": "test_"
+	"prefix": "test_",
+	"shouldMaximize": true
 }
