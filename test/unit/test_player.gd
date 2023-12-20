@@ -22,18 +22,17 @@ func test_player_exists():
 func test_player_has_correct_children():
     var player = get_node("Player")
     
-    # collisionShape2d
-    var collision_shape_2d = player.get_node("collisionShape2d")
+    # character body 2d
+    var character_body_2d = player.get_child(0)
+    assert_true(character_body_2d is CharacterBody2D, "Player does not have characterBody2d child")
+    assert_true(character_body_2d.visible, "Player characterBody2d child gravity scale is incorrect")
+
+    # collision shape 2d
+    var collision_shape_2d = character_body_2d.get_child(0)
     assert_true(collision_shape_2d is CollisionShape2D, "Player does not have collisionShape2d child")
     assert_true(collision_shape_2d.shape is RectangleShape2D, "Player collisionShape2d child does not have RectangleShape2D shape")
-    assert_true(collision_shape_2d.shape.disabled == false, "Player collisionShape2d child shape is disabled")
+    assert_true(collision_shape_2d.disabled == false, "Player collisionShape2d child shape is disabled")
     assert_true(collision_shape_2d.visible == true, "Player collisionShape2d child is not visible")
-
-    # sprite2d
-    var sprite_2d = player.get_node("sprite2d")
-    assert_true(sprite_2d is Sprite2D, "Player does not have sprite2d child")
-    assert_true(sprite_2d.texture is Texture, "Player sprite2d child does not have Texture texture")
-    assert_true(sprite_2d.visible == true, "Player sprite2d child texture is not visible")
 
 
 func test_player_initial_position():
@@ -61,6 +60,7 @@ func test_player_moved_right():
     var initial_position = player.position
     Input.action_press("move_right")
     player._process(1)  # Simulate 1 second of game time
+    Input.action_release("move_right")
     var final_position = player.position
     assert_true(final_position.x > initial_position.x, "Player did not move right")
 
@@ -70,6 +70,7 @@ func test_player_moved_left():
     var initial_position = player.position
     Input.action_press("move_left")
     player._process(1)  # Simulate 1 second of game time
+    Input.action_release("move_left")
     var final_position = player.position
     assert_true(final_position.x < initial_position.x, "Player did not move left")
 

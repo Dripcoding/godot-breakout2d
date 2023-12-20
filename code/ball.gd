@@ -41,6 +41,11 @@ var game_ready_state: GameReadyState = game_ready_resource.new(normal_velocity)
 var game_terminal_state: GameTerminalState = game_terminal_resource.new(position_x_initial, position_y_initial, self)
 
 
+func _ready() -> void:
+	position.x = position_x_initial
+	position.y = position_y_initial
+
+
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if !ball_state:
 		return
