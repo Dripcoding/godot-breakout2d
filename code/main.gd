@@ -22,5 +22,5 @@ func quit_game() -> void:
 	propagate_call('quit')
 
 
-func _on_game_over():
+func _on_game_over() -> void:
 	propagate_call('on_game_over')

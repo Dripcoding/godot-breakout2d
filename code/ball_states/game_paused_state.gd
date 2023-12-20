@@ -4,7 +4,7 @@ class_name GamePausedState
 var ball_context: Ball
 
 
-func _init(ball: Ball):
+func _init(ball: Ball) -> void:
 	ball_context = ball
 
 
