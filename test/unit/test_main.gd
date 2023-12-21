@@ -11,7 +11,13 @@ func before_each():
 
 func after_each():
     var main = get_node("Main")
-    remove_child(main)
+    var brick_grid = get_node("Main/BrickGrid")
+    assert_not_null(brick_grid, "BrickGrid node does not exist")
+    
+    for brick in brick_grid.bricks:
+        brick.free()
+    
+    main.free()
 
 
 func test_main_exists():

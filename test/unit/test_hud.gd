@@ -11,7 +11,7 @@ func before_each():
 
 func after_each():
     var hud = get_node("Hud")
-    remove_child(hud)
+    hud.free()
 
 
 func test_hud_exists():
@@ -76,19 +76,25 @@ func test_score_increment():
 func test_player_lives_decrement():
     var hud = get_node("Hud")
     var player_lives_label = get_node("Hud/PlayerLivesLabel")
-    hud._on_ball_out_of_bounds(Node2D.new())
+    var body = Node2D.new()
+    hud._on_ball_out_of_bounds(body)
     assert_eq(hud.playerLives, 2, "Player lives did not decrement")
     assert_eq(player_lives_label.text, 'Lives: 2', "Player lives label text is not 'Lives: 2'")
+    body.free()
 
 
 func test_game_over():
     var hud = get_node("Hud")
     var game_over_label = get_node("Hud/GameOverLabel")
     var score_label = get_node("Hud/ScoreLabel")
+    var body = Node2D.new()
     watch_signals(hud)
-    hud._on_ball_out_of_bounds(Node2D.new())
-    hud._on_ball_out_of_bounds(Node2D.new())
-    hud._on_ball_out_of_bounds(Node2D.new())
+    hud._on_ball_out_of_bounds(body)
+    hud._on_ball_out_of_bounds(body)
+    hud._on_ball_out_of_bounds(body)
     assert_eq(game_over_label.text, 'Game Over', "Game over label text is not 'Game Over'")
     assert_eq(score_label.text, 'Score: 0', "Score label text is not 'Score: 0'")
     assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
+    game_over_label.free()
+    score_label.free()
+    body.free()

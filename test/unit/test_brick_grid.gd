@@ -11,7 +11,7 @@ func before_each():
 
 func after_each():
 	var brick_grid = get_node("BrickGrid")
-	remove_child(brick_grid)
+	brick_grid.free()
 
 
 func test_brick_grid_node_exists():

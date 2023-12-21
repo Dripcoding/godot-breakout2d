@@ -1,5 +1,7 @@
 {
 	"dirs": ["res://test/unit/", "res://test/integration/"],
 	"prefix": "test_",
-	"shouldMaximize": true
+	"should_maximize": true,
+	"compact_mode": false,
+	"log_level": 3
 }

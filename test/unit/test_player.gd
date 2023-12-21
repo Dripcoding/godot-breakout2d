@@ -11,7 +11,7 @@ func before_each():
 
 func after_each():
     var player = get_node("Player")
-    remove_child(player)
+    player.free()
 
 
 func test_player_exists():

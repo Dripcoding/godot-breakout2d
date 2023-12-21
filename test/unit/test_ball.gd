@@ -11,8 +11,8 @@ func before_each():
 
 func after_each():
     var ball = get_node("Ball")
-    remove_child(ball)
-
+    ball.free()
+ 
 
 func test_ball_exists():
     var ball = get_node("Ball")
@@ -54,11 +54,13 @@ func test_ball_state():
 
 
 func test_ball_collides_with_brick():
+    # From within your tests
     var ball = get_node("Ball")
     var brick = Node2D.new()
     brick.add_to_group("brick")
     ball._on_body_entered(brick)
     assert_eq(ball.ball_state, ball.brick_state, "Ball state is not brick_state after colliding with a brick")
+    brick.free()
 
 
 func test_ball_collides_with_wall():
@@ -67,12 +69,15 @@ func test_ball_collides_with_wall():
     wall.add_to_group("wall")
     ball._on_body_entered(wall)
     assert_eq(ball.ball_state, ball.wall_state, "Ball state is not wall_state after colliding with a wall")
+    wall.free()
 
 
 func test_ball_out_of_bounds():
     var ball = get_node("Ball")
-    ball._on_ball_out_of_bounds(Node2D.new())
+    var body = Node2D.new()
+    ball._on_ball_out_of_bounds(body)
     assert_eq(ball.ball_state, ball.out_of_bounds_state, "Ball state is not out_of_bounds_state after going out of bounds")
+    body.free()
 
 
 func test_ball_pause():
