@@ -30,3 +30,5 @@ func _on_ball_out_of_bounds(body:Node2D) -> void:
 func _on_game_over() -> void:
 	$GameOverLabel.show()
 	$ScoreLabel.text = 'Score: 0'
+
+# todo: impl quit

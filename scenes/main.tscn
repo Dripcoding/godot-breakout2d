@@ -51,4 +51,7 @@ position = Vector2(32, 708)
 
 [node name="Hud" parent="." instance=ExtResource("10_buwbv")]
 
+[connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]
+[connection signal="body_entered" from="OutOfBoundsArea" to="Hud" method="_on_ball_out_of_bounds"]
+[connection signal="game_over" from="Hud" to="." method="_on_game_over"]
