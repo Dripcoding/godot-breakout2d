@@ -1,22 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbi1h4bkp4ask"]
+[gd_scene load_steps=12 format=3 uid="uid://dbi1h4bkp4ask"]
 
 [ext_resource type="Script" path="res://code/main.gd" id="1_3mcnq"]
 [ext_resource type="PackedScene" uid="uid://qn1bm7tqvr6p" path="res://scenes/player.tscn" id="2_wluck"]
 [ext_resource type="PackedScene" uid="uid://bm7sesqo7tbli" path="res://scenes/ball.tscn" id="3_li5o6"]
 [ext_resource type="PackedScene" uid="uid://dfar26gqsb5bp" path="res://scenes/top_boundary.tscn" id="4_8frh8"]
-[ext_resource type="Script" path="res://code/ball.gd" id="4_70wbh"]
 [ext_resource type="PackedScene" uid="uid://br7v03cx7yw71" path="res://scenes/right_boundary.tscn" id="5_mrj2s"]
 [ext_resource type="PackedScene" uid="uid://cfcq0cgknxy7a" path="res://scenes/left_boundary.tscn" id="6_acnk4"]
 [ext_resource type="PackedScene" uid="uid://dls5q8558cvqm" path="res://scenes/brick_grid.tscn" id="7_3xv8m"]
 [ext_resource type="Script" path="res://code/brick_grid.gd" id="8_jo2sc"]
 [ext_resource type="PackedScene" uid="uid://3qjtxier3qqw" path="res://scenes/out_of_bounds_area.tscn" id="8_m6w5o"]
-[ext_resource type="Script" path="res://code/hud.gd" id="9_bynq6"]
+[ext_resource type="PackedScene" uid="uid://pcd7k6tdewnk" path="res://scenes/hud.tscn" id="10_buwbv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0pcjc"]
 friction = 0.0
 bounce = 1.0
 
-[node name="main" type="Node"]
+[node name="Main" type="Node"]
 script = ExtResource("1_3mcnq")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_wluck")]
@@ -27,7 +26,6 @@ scale = Vector2(5.22222, 2)
 [node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
 unique_name_in_owner = true
 position = Vector2(499, 550)
-script = ExtResource("4_70wbh")
 
 [node name="TopBoundary" parent="." groups=["wall"] instance=ExtResource("4_8frh8")]
 physics_material_override = SubResource("PhysicsMaterial_0pcjc")
@@ -51,47 +49,6 @@ script = ExtResource("8_jo2sc")
 unique_name_in_owner = true
 position = Vector2(32, 708)
 
-[node name="Hud" type="CanvasLayer" parent="."]
-script = ExtResource("9_bynq6")
+[node name="Hud" parent="." instance=ExtResource("10_buwbv")]
 
-[node name="ScoreLabel" type="Label" parent="Hud"]
-unique_name_in_owner = true
-offset_left = 810.0
-offset_top = 21.0
-offset_right = 958.0
-offset_bottom = 66.0
-theme_override_font_sizes/font_size = 32
-text = "Score: 0"
-horizontal_alignment = 1
-
-[node name="PlayerLivesLabel" type="Label" parent="Hud"]
-unique_name_in_owner = true
-offset_left = 56.0
-offset_top = 22.0
-offset_right = 168.0
-offset_bottom = 67.0
-theme_override_font_sizes/font_size = 32
-text = "Lives: 3"
-horizontal_alignment = 1
-
-[node name="StartGameBtn" type="Button" parent="Hud"]
-unique_name_in_owner = true
-offset_right = 8.0
-offset_bottom = 8.0
-
-[node name="GameOverLabel" type="Label" parent="Hud"]
-unique_name_in_owner = true
-offset_left = 383.0
-offset_top = 29.0
-offset_right = 556.0
-offset_bottom = 74.0
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
-text = "Game Over"
-horizontal_alignment = 1
-
-[connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]
-[connection signal="body_entered" from="OutOfBoundsArea" to="Hud" method="_on_ball_out_of_bounds"]
-[connection signal="game_over" from="Hud" to="." method="_on_game_over"]
-[connection signal="game_over" from="Hud" to="Hud" method="_on_game_over"]

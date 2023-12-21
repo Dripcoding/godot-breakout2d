@@ -19,6 +19,10 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 window/size/viewport_width=1000
 window/size/viewport_height=720
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [input]
 
 move_right={
