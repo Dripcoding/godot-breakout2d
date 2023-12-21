@@ -41,21 +41,42 @@ func test_has_top_boundary():
     var main = get_node("Main")
     var top_boundary = main.get_node("TopBoundary")
     assert_not_null(top_boundary, "TopBoundary node does not exist")
-
+    assert_true(top_boundary is StaticBody2D, "TopBoundary is not a StaticBody2D")
 
 func test_has_left_boundary():
     var main = get_node("Main")
     var left_boundary = main.get_node("LeftBoundary")
     assert_not_null(left_boundary, "LeftBoundary node does not exist")
+    assert_true(left_boundary is StaticBody2D, "LeftBoundary is not a StaticBody2D")
+    
+    # collision shape 2d
+    var collision_shape_2d = left_boundary.get_node("CollisionShape2D")
+    assert_not_null(collision_shape_2d, "CollisionShape2D node does not exist")
+    assert_eq(collision_shape_2d.shape is RectangleShape2D, true, "CollisionShape2D shape is not RectangleShape2D")
+    assert_true(collision_shape_2d.visible, "CollisionShape2D is visible")
 
 
 func test_has_right_boundary():
     var main = get_node("Main")
     var right_boundary = main.get_node("RightBoundary")
     assert_not_null(right_boundary, "RightBoundary node does not exist")
+    assert_true(right_boundary is StaticBody2D, "RightBoundary is not a StaticBody2D")
+
+    # collision shape 2d
+    var collision_shape_2d = right_boundary.get_node("CollisionShape2D")
+    assert_not_null(collision_shape_2d, "CollisionShape2D node does not exist")
+    assert_eq(collision_shape_2d.shape is RectangleShape2D, true, "CollisionShape2D shape is not RectangleShape2D")
+    assert_true(collision_shape_2d.visible, "CollisionShape2D is visible")
 
 
 func test_has_out_of_bounds_boundary():
     var main = get_node("Main")
     var out_of_bounds_boundary = main.get_node("OutOfBoundsArea")
     assert_not_null(out_of_bounds_boundary, "OutOfBoundsArea node does not exist")
+    assert_true(out_of_bounds_boundary is Area2D, "OutOfBoundsArea is not an Area2D")
+
+    # collision shape 2d
+    var collision_shape_2d = out_of_bounds_boundary.get_node("CollisionShape2D")
+    assert_not_null(collision_shape_2d, "CollisionShape2D node does not exist")
+    assert_eq(collision_shape_2d.shape is RectangleShape2D, true, "CollisionShape2D shape is not RectangleShape2D")
+    assert_true(collision_shape_2d.visible, "CollisionShape2D is visible")
