@@ -53,7 +53,7 @@ func test_hud_has_game_over_label():
 
 func test_initial_player_lives():
     var hud = get_node("Hud")
-    assert_eq(hud.playerLives, 3, "Initial player lives is not 3")
+    assert_eq(hud.player_lives, 3, "Initial player lives is not 3")
 
 
 func test_initial_score():
@@ -74,7 +74,7 @@ func test_player_lives_decrement():
     var player_lives_label = get_node("Hud/PlayerLivesLabel")
     var body = Node2D.new()
     hud._on_ball_out_of_bounds(body)
-    assert_eq(hud.playerLives, 2, "Player lives did not decrement")
+    assert_eq(hud.player_lives, 2, "Player lives did not decrement")
     assert_eq(player_lives_label.text, 'Lives: 2', "Player lives label text is not 'Lives: 2'")
     body.free()
 
