@@ -11,7 +11,7 @@ func before_each():
 
 func after_each():
     var player = get_node("Player")
-    remove_child(player)
+    player.free()
 
 
 func test_player_exists():
@@ -43,7 +43,7 @@ func test_player_initial_position():
 
 func test_player_speed():
     var player = get_node("Player")
-    var expected_speed = 300
+    var expected_speed: float = 300
     assert_eq(player.speed, expected_speed, "Player speed is incorrect")
 
 
