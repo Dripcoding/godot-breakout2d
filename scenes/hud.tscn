@@ -42,4 +42,4 @@ theme_override_font_sizes/font_size = 32
 text = "Game Over"
 horizontal_alignment = 1
 
-[connection signal="game_over" from="." to="." method="_on_game_over"]
+[connection signal="game_over" from="." to="." method="_on_game_over_signal_received"]

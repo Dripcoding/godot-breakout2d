@@ -18,6 +18,12 @@ max_contacts_reported = 1
 contact_monitor = true
 linear_velocity = Vector2(0, 350)
 script = ExtResource("1_wak5b")
+brick_collision_rotation = null
+player_collision_rotation = null
+wall_collision_rotation = null
+normal_velocity = null
+position_x_initial = null
+position_y_initial = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_w5ual")

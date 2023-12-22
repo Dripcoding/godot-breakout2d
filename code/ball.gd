@@ -13,7 +13,6 @@ signal score
 
 
 var previous_velocity: Vector2 = Vector2.ZERO
-var ball_state
 
 
 const collided_with_brick_resource: Resource = preload("res://code/ball_states/collided_with_brick_state.gd")
@@ -39,6 +38,9 @@ var game_resumed_state: GameResumedState = game_resumed_resource.new(self)
 var game_paused_state: GamePausedState = game_paused_resource.new(self)
 var game_ready_state: GameReadyState = game_ready_resource.new(normal_velocity)
 var game_terminal_state: GameTerminalState = game_terminal_resource.new(position_x_initial, position_y_initial, self)
+
+
+var ball_state = game_ready_state
 
 
 func _ready() -> void:

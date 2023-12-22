@@ -50,16 +50,19 @@ func test_ball_velocity():
 
 func test_ball_state():
     var ball = get_node("Ball")
-    assert_null(ball.ball_state, "Ball state is not null")
+    assert_not_null(ball.ball_state, "Ball state is not null")
+    assert_true(ball.ball_state is GameReadyState, "Ball state is not GameReadyState")
 
 
 func test_ball_collides_with_brick():
-    # From within your tests
     var ball = get_node("Ball")
     var brick = Node2D.new()
     brick.add_to_group("brick")
+    watch_signals(ball)
     ball._on_body_entered(brick)
     assert_eq(ball.ball_state, ball.brick_state, "Ball state is not brick_state after colliding with a brick")
+    assert_signal_emitted(ball, "score")
+    assert_signal_emit_count(ball, "score", 1)
     brick.free()
 
 
@@ -96,3 +99,9 @@ func test_ball_quit():
     var ball = get_node("Ball")
     ball.quit()
     assert_eq(ball.ball_state, ball.game_terminal_state, "Ball state is not game_terminal_state after quitting")
+
+
+func test_ball_game_over():
+    var ball = get_node("Ball")
+    ball.on_game_over()
+    assert_eq(ball.ball_state, ball.game_terminal_state, "Ball state is not game_terminal_state after game over")

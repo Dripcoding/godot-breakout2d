@@ -20,7 +20,6 @@ func test_hud_exists():
 
 
 func test_hud_has_score_label():
-    var hud = get_node("Hud")
     var score_label = get_node("Hud/ScoreLabel")
     assert_not_null(score_label, "Score label does not exist")
     assert_true(score_label is Label, "Score label is not a Label")
@@ -29,7 +28,6 @@ func test_hud_has_score_label():
 
 
 func test_hud_has_player_lives_label():
-    var hud = get_node("Hud")
     var player_lives_label = get_node("Hud/PlayerLivesLabel")
     assert_not_null(player_lives_label, "Player lives label does not exist")
     assert_true(player_lives_label is Label, "Player lives label is not a Label")
@@ -38,7 +36,6 @@ func test_hud_has_player_lives_label():
 
 
 func test_hud_has_start_game_btn():
-    var hud = get_node("Hud")
     var start_game_btn = get_node("Hud/StartGameBtn")
     assert_not_null(start_game_btn, "Start game button does not exist")
     assert_true(start_game_btn is Button, "Start game button is not a Button")
@@ -47,7 +44,6 @@ func test_hud_has_start_game_btn():
 
 
 func test_hud_has_game_over_label():
-    var hud = get_node("Hud")
     var game_over_label = get_node("Hud/GameOverLabel")
     assert_not_null(game_over_label, "Game over label does not exist")
     assert_true(game_over_label is Label, "Game over label is not a Label")
@@ -95,6 +91,15 @@ func test_game_over():
     assert_eq(game_over_label.text, 'Game Over', "Game over label text is not 'Game Over'")
     assert_eq(score_label.text, 'Score: 0', "Score label text is not 'Score: 0'")
     assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
+    assert_signal_emit_count(hud, "game_over", 1, "Game over signal emitted more than once") 
     game_over_label.free()
     score_label.free()
     body.free()
+
+
+func test_game_quit():
+    var hud = get_node("Hud")
+    watch_signals(hud)
+    hud.quit()
+    assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
+    assert_signal_emit_count(hud, "game_over", 1, "Game over signal emitted more than once")
