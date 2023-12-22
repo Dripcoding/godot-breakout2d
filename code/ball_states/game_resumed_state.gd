@@ -9,8 +9,8 @@ func _init(ball: Ball) -> void:
 
 
 func handle_physics(state: PhysicsDirectBodyState2D) -> void:
-	state.linear_velocity = get_previous_velocity()
+	state.linear_velocity = get_ball_context().get_previous_velocity()
 
 
-func get_previous_velocity() -> Vector2:
-	return ball_context.get_previous_velocity()
+func get_ball_context() -> Ball:
+	return ball_context

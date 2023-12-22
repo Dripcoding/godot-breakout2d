@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://pcd7k6tdewnk"]
+
+[ext_resource type="Script" path="res://code/hud.gd" id="1_2ktcs"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_2ktcs")
+
+[node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 810.0
+offset_top = 21.0
+offset_right = 958.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="PlayerLivesLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 56.0
+offset_top = 22.0
+offset_right = 168.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 32
+text = "Lives: 3"
+horizontal_alignment = 1
+
+[node name="StartGameBtn" type="Button" parent="."]
+unique_name_in_owner = true
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Start Game"
+
+[node name="GameOverLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 383.0
+offset_top = 29.0
+offset_right = 556.0
+offset_bottom = 74.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Game Over"
+horizontal_alignment = 1
+
+[connection signal="game_over" from="." to="." method="_on_game_over_signal_received"]
