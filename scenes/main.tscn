@@ -16,6 +16,7 @@ friction = 0.0
 bounce = 1.0
 
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("1_3mcnq")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_wluck")]
