@@ -11,10 +11,12 @@ func _process(delta) -> void:
 
 
 func pause_game() -> void:
+	get_tree().paused = true
 	propagate_call('pause')
 
 
 func resume_game() -> void:
+	get_tree().paused = false
 	propagate_call('resume')
 
 

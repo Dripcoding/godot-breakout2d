@@ -13,8 +13,6 @@ func handle_physics(state: PhysicsDirectBodyState2D) -> void:
 	if state.linear_velocity != Vector2.ZERO:
 		context.set_previous_velocity(state.linear_velocity)
 
-	state.linear_velocity = Vector2.ZERO
-
 
 func get_ball_context() -> Ball:
 	return ball_context

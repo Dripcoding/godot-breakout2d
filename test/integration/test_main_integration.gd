@@ -26,6 +26,7 @@ func test_game_starts_in_ready_state():
 
 
 func test_player_pausing_game():
+    var main = get_node("Main")
     var ball = get_node("Main/Ball")
     var player = get_node("Main/Player")
     var hud = get_node("Main/Hud")
@@ -38,6 +39,7 @@ func test_player_pausing_game():
     pause_game()
     var player_position_2 = move_left()
 
+    assert_eq(main.get_tree().paused, true, "Game should be paused")
     assert_true(player.pause_game, "Player should be paused")
     assert_eq(player_position_1, player_position_2, "Player should not move while game is paused")
     assert_eq(hud.player_lives, 3, "Player should not lose a life while game is paused")
@@ -78,6 +80,7 @@ func test_player_quitting_game():
 
 
 func test_player_resuming_game():
+    var main = get_node("Main")
     var player = get_node("Main/Player")
     var ball = get_node("Main/Ball")
     var hud = get_node("Main/Hud")
@@ -92,6 +95,7 @@ func test_player_resuming_game():
     var player_position_1 = move_left()
     var player_position_2 = move_left()
 
+    assert_true(main.get_tree().paused == false, "Game should not be paused")
     assert_false(player.pause_game, "Player should not be paused")
     assert_ne(player_position_1, player_position_2, "Player should move after game is resumed")
     assert_eq(hud.player_lives, 3, "Player should not lose a life while game is resumed")
