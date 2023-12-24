@@ -32,6 +32,17 @@ func on_game_over() -> void:
 	$GameOverLabel.show()
 	$ScoreLabel.text = 'Score: 0'
 
+	
+func _on_start_game_btn_pressed():
+	game_start.emit()
+
 
 func quit() -> void:
 	game_over.emit()
+
+
+func on_game_start() -> void:
+	score = 0
+	player_lives = 3
+	$PlayerLivesLabel.text = 'Lives: ' + str(player_lives)
+	$ScoreLabel.text = 'Score: ' + str(score)

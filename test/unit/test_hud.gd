@@ -103,3 +103,14 @@ func test_game_quit():
     hud.quit()
     assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
     assert_signal_emit_count(hud, "game_over", 1, "Game over signal emitted more than once")
+
+
+func test_game_start():
+    var hud = get_node("Hud")
+    var start_game_btn = get_node("Hud/StartGameBtn")
+    watch_signals(hud)
+    
+    start_game_btn.emit_signal("pressed")
+
+    assert_signal_emitted(hud, "game_start", "Game start signal not emitted")
+    assert_signal_emit_count(hud, "game_start", 1, "Game start signal emitted more than once")

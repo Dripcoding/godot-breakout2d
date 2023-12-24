@@ -4,6 +4,7 @@
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_2ktcs")
+player_lives = null
 
 [node name="ScoreLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -52,3 +53,6 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Game Over"
 horizontal_alignment = 1
+
+[connection signal="game_over" from="." to="." method="_on_game_over_signal_received"]
+[connection signal="pressed" from="StartGameBtn" to="." method="_on_start_game_btn_pressed"]
