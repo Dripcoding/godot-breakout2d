@@ -4,6 +4,7 @@
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_2ktcs")
+player_lives = null
 
 [node name="ScoreLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -27,8 +28,19 @@ horizontal_alignment = 1
 
 [node name="StartGameBtn" type="Button" parent="."]
 unique_name_in_owner = true
-offset_right = 8.0
-offset_bottom = 8.0
+anchors_preset = -1
+anchor_left = 0.144
+anchor_top = 0.463889
+anchor_right = 0.448
+anchor_bottom = 0.5375
+offset_left = 216.0
+offset_top = -4.0
+offset_right = 216.0
+offset_bottom = -4.00003
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
 text = "Start Game"
 
 [node name="GameOverLabel" type="Label" parent="."]
@@ -43,3 +55,4 @@ text = "Game Over"
 horizontal_alignment = 1
 
 [connection signal="game_over" from="." to="." method="_on_game_over_signal_received"]
+[connection signal="pressed" from="StartGameBtn" to="." method="_on_start_game_btn_pressed"]

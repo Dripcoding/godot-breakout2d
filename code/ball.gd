@@ -73,6 +73,11 @@ func on_game_over() -> void:
 	set_state(game_terminal_state)
 
 
+func on_game_start() -> void:
+	get_parent().get_tree().paused = false
+	set_state(game_ready_state)
+
+
 func pause() -> void:
 	set_state(game_paused_state)
 

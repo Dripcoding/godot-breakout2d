@@ -1,6 +1,10 @@
 extends Node
 
 
+func _ready() -> void:
+	get_tree().paused = true
+
+
 func _process(delta) -> void:
 	if Input.is_action_pressed('pause'):
 		pause_game()
@@ -26,3 +30,7 @@ func quit_game() -> void:
 
 func _on_game_over() -> void:
 	propagate_call('on_game_over')
+
+
+func _on_game_start():
+	propagate_call('on_game_start')

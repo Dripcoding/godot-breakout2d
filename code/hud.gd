@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 signal game_over
+signal game_start
 
 
 @export var player_lives: int = 3
@@ -27,10 +28,22 @@ func _on_ball_out_of_bounds(body:Node2D) -> void:
 		game_over.emit()
 
 
-func _on_game_over_signal_received() -> void:
+func on_game_over() -> void:
 	$GameOverLabel.show()
 	$ScoreLabel.text = 'Score: 0'
+
+	
+func _on_start_game_btn_pressed():
+	game_start.emit()
 
 
 func quit() -> void:
 	game_over.emit()
+
+
+func on_game_start() -> void: 
+	score = 0
+	player_lives = 3
+	$PlayerLivesLabel.text = 'Lives: ' + str(player_lives)
+	$ScoreLabel.text = 'Score: ' + str(score)
+	$StartGameBtn.hide()
