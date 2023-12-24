@@ -145,6 +145,29 @@ func test_player_losing_game():
     assert_signal_emit_count(out_of_bounds_area, "body_entered", 3, "Body entered signal not emitted 3 times")
 
 
+func test_player_starting_game():
+    var main = get_node("Main")
+    var hud = get_node("Main/Hud")
+    var start_game_btn = get_node("Main/Hud/StartGameBtn")
+    var player_lives_label = get_node("Main/Hud/PlayerLivesLabel")
+    var score_label = get_node("Main/Hud/ScoreLabel")
+    watch_signals(hud)
+
+    assert_true(main.get_tree().paused, "Game should be paused")
+    assert_true(start_game_btn.visible, "Start game button should be visible")
+    assert_eq(player_lives_label.text, "Lives: 3", "Player lives label should be visible")
+    assert_eq(score_label.text, "Score: 0", "Score label should be visible")
+    assert_signal_not_emitted(hud, "game_start", "Game start signal should not be emitted")
+    
+    start_game_btn.emit_signal("pressed")
+    gut.simulate(main, 1, 1)
+
+    assert_false(main.get_tree().paused, "Game should not be paused")
+    assert_false(start_game_btn.visible, "Start game button should not be visible")
+    assert_signal_emitted(hud, "game_start", "Game start signal not emitted")
+    assert_signal_emit_count(hud, "game_start", 1, "Game start signal not emitted once")
+
+
 # ====== HELPER FUNCTIONS ======
 func pause_game():
     var main = get_node("Main")

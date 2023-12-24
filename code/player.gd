@@ -11,7 +11,7 @@ extends Sprite2D
 const X_OFFSET: float = 70
 
 
-var pause_game: bool = false
+var pause_game: bool = true
 
 
 func _ready() -> void:
@@ -46,9 +46,14 @@ func on_game_over() -> void:
 	position.y = position_y_initial
 
 
-func pause() -> void:
-	pause_game = true 
+func on_game_start() -> void:
+	set_pause_game(false)
 
+func pause() -> void:
+	set_pause_game(true)
 
 func resume() -> void:
-	pause_game = false
+	set_pause_game(false)
+
+func set_pause_game(val: bool) -> void:
+	pause_game = val

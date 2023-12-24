@@ -105,3 +105,8 @@ func test_ball_game_over():
     var ball = get_node("Ball")
     ball.on_game_over()
     assert_eq(ball.ball_state, ball.game_terminal_state, "Ball state is not game_terminal_state after game over")
+
+func test_on_game_start():
+    var ball = get_node("Ball")
+    ball.on_game_start()
+    assert_eq(ball.ball_state, ball.game_ready_state, "Ball state is not game_ready_state after game start")

@@ -23,6 +23,9 @@ script = ExtResource("1_3mcnq")
 unique_name_in_owner = true
 position = Vector2(500, 629)
 scale = Vector2(5.22222, 2)
+speed = 300.0
+position_x_initial = 500.0
+position_y_initial = 629.0
 
 [node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_li5o6")]
 unique_name_in_owner = true
@@ -51,7 +54,6 @@ unique_name_in_owner = true
 position = Vector2(32, 708)
 
 [node name="Hud" parent="." instance=ExtResource("10_buwbv")]
-player_lives = null
 
 [connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]

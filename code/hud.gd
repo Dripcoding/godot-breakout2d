@@ -41,8 +41,9 @@ func quit() -> void:
 	game_over.emit()
 
 
-func on_game_start() -> void:
+func on_game_start() -> void: 
 	score = 0
 	player_lives = 3
 	$PlayerLivesLabel.text = 'Lives: ' + str(player_lives)
 	$ScoreLabel.text = 'Score: ' + str(score)
+	$StartGameBtn.hide()

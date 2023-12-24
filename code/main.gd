@@ -1,6 +1,10 @@
 extends Node
 
 
+func _ready() -> void:
+	get_tree().paused = true
+
+
 func _process(delta) -> void:
 	if Input.is_action_pressed('pause'):
 		pause_game()

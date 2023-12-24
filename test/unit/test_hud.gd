@@ -104,13 +104,28 @@ func test_game_quit():
     assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
     assert_signal_emit_count(hud, "game_over", 1, "Game over signal emitted more than once")
 
-
-func test_game_start():
+    
+func test_start_button_hidden_on_game_start():
     var hud = get_node("Hud")
     var start_game_btn = get_node("Hud/StartGameBtn")
+
+    hud.on_game_start()
+
+    assert_false(start_game_btn.visible, "Start game button is visible")
+        
+
+func test_game_start_btn_pressed():
+    var hud = get_node("Hud")
+    var start_game_btn = get_node("Hud/StartGameBtn")
+    var player_lives_label = get_node("Hud/PlayerLivesLabel")
+    var score_label = get_node("Hud/ScoreLabel")
     watch_signals(hud)
     
     start_game_btn.emit_signal("pressed")
 
     assert_signal_emitted(hud, "game_start", "Game start signal not emitted")
     assert_signal_emit_count(hud, "game_start", 1, "Game start signal emitted more than once")
+    assert_true(player_lives_label.visible, "Player lives label is not visible")
+    assert_eq(player_lives_label.text, 'Lives: 3', "Player lives label text is not 'Lives: 3'")
+    assert_true(score_label.visible, "Score label is not visible")
+    assert_eq(score_label.text, 'Score: 0', "Score label text is not 'Score: 0'")

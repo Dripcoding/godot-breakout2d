@@ -50,16 +50,17 @@ func test_player_speed():
 func test_player_did_not_move():
     var player = get_node("Player")
     var initial_position = player.position
-    player._process(1)  # Simulate 1 second of game time
+    gut.simulate(player, 1, 1)
     var final_position = player.position
     assert_eq(initial_position, final_position, "Player moved")
 
 
 func test_player_moved_right():
     var player = get_node("Player")
+    player.set_pause_game(false)
     var initial_position = player.position
     Input.action_press("move_right")
-    player._process(1)  # Simulate 1 second of game time
+    gut.simulate(player, 1, 1)
     Input.action_release("move_right")
     var final_position = player.position
     assert_true(final_position.x > initial_position.x, "Player did not move right")
@@ -67,9 +68,10 @@ func test_player_moved_right():
 
 func test_player_moved_left():
     var player = get_node("Player")
+    player.set_pause_game(false)
     var initial_position = player.position
     Input.action_press("move_left")
-    player._process(1)  # Simulate 1 second of game time
+    gut.simulate(player, 1, 1)
     Input.action_release("move_left")
     var final_position = player.position
     assert_true(final_position.x < initial_position.x, "Player did not move left")
