@@ -27,9 +27,14 @@ func get_bricks() -> Array[Node]:
 
 
 func reset_bricks() -> void:
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+
 	for brick in bricks:
 		var new_brick: Node = bricks_scene.instantiate()
 		new_brick.add_to_group('bricks')
+		new_brick.add_to_group('brick')
 		new_brick.position = brick.position
 		self.add_child(new_brick)
 		new_brick.show()
