@@ -1,5 +1,7 @@
 extends Node
 
+@onready var is_game_over = false;
+@onready var has_game_started = false;
 
 func _ready() -> void:
 	get_tree().paused = true
@@ -20,17 +22,21 @@ func pause_game() -> void:
 
 
 func resume_game() -> void:
-	get_tree().paused = false
+	if has_game_started and not is_game_over:
+		get_tree().paused = false
 	propagate_call('resume')
 
 
 func quit_game() -> void:
+	is_game_over = true
 	propagate_call('quit')
 
 
 func _on_game_over() -> void:
+	is_game_over = true
 	propagate_call('on_game_over')
 
 
 func _on_game_start():
+	has_game_started = true
 	propagate_call('on_game_start')
