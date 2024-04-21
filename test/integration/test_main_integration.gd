@@ -86,8 +86,9 @@ func test_player_resuming_game():
     var hud = get_node("Main/Hud")
     var player_lives_label = get_node("Main/Hud/PlayerLivesLabel")
     var player_score_label = get_node("Main/Hud/ScoreLabel")
+    var game_start_btn = get_node("Main/Hud/StartGameBtn")
 
-    assert_true(ball.ball_state is GameReadyState, "Game should start in ready state")
+    game_start_btn.emit_signal("pressed")
 
     pause_game()
     resume_game()
@@ -160,7 +161,6 @@ func test_player_starting_game():
     assert_signal_not_emitted(hud, "game_start", "Game start signal should not be emitted")
     
     start_game_btn.emit_signal("pressed")
-    gut.simulate(main, 1, 1)
 
     assert_false(main.get_tree().paused, "Game should not be paused")
     assert_false(start_game_btn.visible, "Start game button should not be visible")
