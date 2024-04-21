@@ -29,11 +29,13 @@ func resume_game() -> void:
 
 func quit_game() -> void:
 	is_game_over = true
+	has_game_started = false
 	propagate_call('quit')
 
 
 func _on_game_over() -> void:
 	is_game_over = true
+	has_game_started = false
 	propagate_call('on_game_over')
 
 
