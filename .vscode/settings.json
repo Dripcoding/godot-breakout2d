@@ -1,3 +1,4 @@
 {
-	"cmake.configureOnOpen": true
+	"cmake.configureOnOpen": true,
+	"godotTools.editorPath.godot4": "/usr/bin/Godot_v4.2.2-stable_linux.x86_64"
 }
