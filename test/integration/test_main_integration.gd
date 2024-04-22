@@ -168,6 +168,13 @@ func test_player_starting_game():
     assert_signal_emit_count(hud, "game_start", 1, "Game start signal not emitted once")
 
 
+func test_high_score_not_shown_after_game_quit():
+    pass
+
+
+func test_high_score_shown_after_game_over():
+    pass
+
 # ====== HELPER FUNCTIONS ======
 func pause_game():
     var main = get_node("Main")
