@@ -7,6 +7,7 @@ var main_scene = load("res://scenes/main.tscn")
 func before_each():
     var main = main_scene.instantiate()
     add_child(main)
+    clear_high_score()
 
 
 func after_each():
@@ -207,7 +208,6 @@ func test_player_starting_game():
 
 
 func test_high_score_shown_after_game_quit():
-    var hud = get_node("Main/Hud")
     var high_score_label = get_node("Main/Hud/HighScoreLabel")
     var start_game_btn = get_node("Main/Hud/StartGameBtn")
     var utilities = get_node("Main/Utilities")
@@ -225,7 +225,6 @@ func test_high_score_shown_after_game_quit():
     assert_eq(high_score_label.text, "High Score: 1","High score should be greater than 0")
 
 func test_high_score_shown_after_game_over():
-    var hud = get_node("Main/Hud")
     var high_score_label = get_node("Main/Hud/HighScoreLabel")
     var start_game_btn = get_node("Main/Hud/StartGameBtn")
     var utilities = get_node("Main/Utilities")
@@ -282,7 +281,6 @@ func move_left() -> Vector2:
 
 
 func move_player_left() -> Vector2:
-    var main = get_node("Main")
     var player = get_node("Main/Player")
     Input.action_press("move_left")
     Input.action_release("move_left")
@@ -298,3 +296,9 @@ func collide_with_out_of_bounds_area() -> void:
     var out_of_bounds_area = get_node("Main/OutOfBoundsArea")
     var ball = get_node("Main/Ball")
     out_of_bounds_area.emit_signal("body_entered", ball)
+
+
+func clear_high_score() -> void:
+    var empty_resource = SavedGame.new()
+    ResourceSaver.save(empty_resource, "user://saved_game.tres")
+        
