@@ -43,13 +43,13 @@ func _process(delta) -> void:
 
 
 func on_game_over() -> void:
-	game_over = true
+	set_pause_game(true)
 	position.x = position_x_initial
 	position.y = position_y_initial
 
 
 func quit() -> void:
-	game_over = true
+	set_pause_game(true)
 
 
 func on_game_start() -> void:

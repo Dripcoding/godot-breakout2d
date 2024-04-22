@@ -20,6 +20,11 @@ func after_each():
     assert_no_new_orphans()
 
 
+func test_utilities_node_exists():
+    var utilities = get_node("Main/Utilities")
+    assert_not_null(utilities, "Utilities node does not exist")
+
+
 func test_game_starts_in_ready_state():
     var ball = get_node("Main/Ball")
     assert_true(ball.ball_state is GameReadyState, "Game should start in ready state")
@@ -201,12 +206,49 @@ func test_player_starting_game():
     assert_signal_emit_count(hud, "game_start", 1, "Game start signal not emitted once")
 
 
-func test_high_score_not_shown_after_game_quit():
-    pass
+func test_high_score_shown_after_game_quit():
+    var hud = get_node("Main/Hud")
+    var high_score_label = get_node("Main/Hud/HighScoreLabel")
+    var start_game_btn = get_node("Main/Hud/StartGameBtn")
+    var utilities = get_node("Main/Utilities")
+    var brick_grid = get_node("Main/BrickGrid")
+    var brick1 = brick_grid.get_node("Brick")
 
+    watch_signals(utilities)
+
+    collide_with_brick(brick1)
+    quit_game()
+    start_game_btn.emit_signal("pressed")
+    
+    assert_signal_emitted(utilities, "loaded_game_data", "High score signal not emitted")
+    assert_true(high_score_label.visible, "High score label should be visible")
+    assert_eq(high_score_label.text, "High Score: 1","High score should be greater than 0")
 
 func test_high_score_shown_after_game_over():
-    pass
+    var hud = get_node("Main/Hud")
+    var high_score_label = get_node("Main/Hud/HighScoreLabel")
+    var start_game_btn = get_node("Main/Hud/StartGameBtn")
+    var utilities = get_node("Main/Utilities")
+    var brick_grid = get_node("Main/BrickGrid")
+    var brick1 = brick_grid.get_node("Brick")
+    var brick2 = brick_grid.get_node("Brick2")
+    var brick3 = brick_grid.get_node("Brick3")
+
+    watch_signals(utilities)
+
+    collide_with_brick(brick1)
+    collide_with_brick(brick2)
+    collide_with_brick(brick3)
+
+    collide_with_out_of_bounds_area()
+    collide_with_out_of_bounds_area()
+    collide_with_out_of_bounds_area()
+
+    start_game_btn.emit_signal("pressed")
+
+    assert_signal_emitted(utilities, "loaded_game_data", "High score signal not emitted")
+    assert_true(high_score_label.visible, "High score label should be visible")
+    assert_eq(high_score_label.text, "High Score: 3","High score should be greater than 0")
 
 # ====== HELPER FUNCTIONS ======
 func pause_game():
