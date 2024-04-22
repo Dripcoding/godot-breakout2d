@@ -12,6 +12,7 @@ const X_OFFSET: float = 70
 
 
 var pause_game: bool = true
+var game_over: bool = false
 
 
 func _ready() -> void:
@@ -22,7 +23,7 @@ func _ready() -> void:
 func _process(delta) -> void:
 	var velocity: Vector2 = Vector2.ZERO
 
-	if pause_game:
+	if pause_game or game_over:
 		return
 	elif Input.is_action_pressed('move_right'):
 		velocity.x += 20
@@ -42,19 +43,26 @@ func _process(delta) -> void:
 
 
 func on_game_over() -> void:
-	set_pause_game(true)
+	game_over = true
 	position.x = position_x_initial
 	position.y = position_y_initial
+
+
+func quit() -> void:
+	game_over = true
 
 
 func on_game_start() -> void:
 	set_pause_game(false)
 
+
 func pause() -> void:
 	set_pause_game(true)
 
+
 func resume() -> void:
 	set_pause_game(false)
+
 
 func set_pause_game(val: bool) -> void:
 	pause_game = val
