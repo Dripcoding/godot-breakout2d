@@ -28,15 +28,20 @@ func resume_game() -> void:
 
 
 func quit_game() -> void:
+	has_game_started = false
 	is_game_over = true
+	get_tree().paused = true
 	propagate_call('quit')
 
 
 func _on_game_over() -> void:
 	is_game_over = true
+	get_tree().paused = true
 	propagate_call('on_game_over')
 
 
 func _on_game_start():
 	has_game_started = true
+	is_game_over = false
+	get_tree().paused = false
 	propagate_call('on_game_start')
