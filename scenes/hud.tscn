@@ -4,7 +4,6 @@
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_2ktcs")
-player_lives = null
 
 [node name="ScoreLabel" type="Label" parent="."]
 unique_name_in_owner = true

@@ -27,10 +27,7 @@ func _init(
 
 func handle_physics(state: PhysicsDirectBodyState2D) -> void:
 	var context = get_ball_context()
-	context.position.x = get_ball_position_x_init()
-	context.position.y = get_ball_position_y_init()
-	state.linear_velocity.x = Vector2.ZERO.x
-	state.linear_velocity.y = get_ball_normal_velocity_y()
+	context.reset_position(state)
 
 
 func get_ball_position() -> Vector2:

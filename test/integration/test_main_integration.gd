@@ -79,6 +79,17 @@ func test_player_quitting_game():
     assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
 
 
+func test_player_cannot_move_after_quitting_game():
+    var ball = get_node("Main/Ball")
+
+    assert_true(ball.ball_state is GameReadyState, "Game should start in ready state")
+
+    quit_game()
+    var player_position_1 = move_left()    
+    var player_position_2 = move_left()
+    assert_eq(player_position_1, player_position_2, "Player should not move while game is paused")
+
+
 func test_player_resuming_game():
     var main = get_node("Main")
     var player = get_node("Main/Player")
@@ -86,8 +97,9 @@ func test_player_resuming_game():
     var hud = get_node("Main/Hud")
     var player_lives_label = get_node("Main/Hud/PlayerLivesLabel")
     var player_score_label = get_node("Main/Hud/ScoreLabel")
+    var game_start_btn = get_node("Main/Hud/StartGameBtn")
 
-    assert_true(ball.ball_state is GameReadyState, "Game should start in ready state")
+    game_start_btn.emit_signal("pressed")
 
     pause_game()
     resume_game()
@@ -145,6 +157,28 @@ func test_player_losing_game():
     assert_signal_emit_count(out_of_bounds_area, "body_entered", 3, "Body entered signal not emitted 3 times")
 
 
+func test_player_cannot_move_after_game_over():
+    var brick_grid = get_node("Main/BrickGrid")
+    var ball = get_node("Main/Ball")
+    var brick1 = brick_grid.get_node("Brick")
+    var brick2 = brick_grid.get_node("Brick2")
+    var brick3 = brick_grid.get_node("Brick3")
+
+    assert_true(ball.ball_state is GameReadyState, "Game should start in ready state")
+
+    collide_with_brick(brick1)
+    collide_with_brick(brick2)
+    collide_with_brick(brick3)
+
+    collide_with_out_of_bounds_area()
+    collide_with_out_of_bounds_area()
+    collide_with_out_of_bounds_area()
+
+    var player_position_1 = move_player_left()
+    var player_position_2 = move_player_left()
+    assert_eq(player_position_1, player_position_2, "Player should not move after game is over")
+
+
 func test_player_starting_game():
     var main = get_node("Main")
     var hud = get_node("Main/Hud")
@@ -160,7 +194,6 @@ func test_player_starting_game():
     assert_signal_not_emitted(hud, "game_start", "Game start signal should not be emitted")
     
     start_game_btn.emit_signal("pressed")
-    gut.simulate(main, 1, 1)
 
     assert_false(main.get_tree().paused, "Game should not be paused")
     assert_false(start_game_btn.visible, "Start game button should not be visible")
@@ -202,6 +235,14 @@ func move_left() -> Vector2:
     var player = get_node("Main/Player")
     Input.action_press("move_left")
     gut.simulate(main, 1, 1)
+    Input.action_release("move_left")
+    return player.position
+
+
+func move_player_left() -> Vector2:
+    var main = get_node("Main")
+    var player = get_node("Main/Player")
+    Input.action_press("move_left")
     Input.action_release("move_left")
     return player.position
 

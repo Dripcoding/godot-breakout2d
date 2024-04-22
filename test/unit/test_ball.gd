@@ -60,7 +60,6 @@ func test_ball_collides_with_brick():
     brick.add_to_group("brick")
     watch_signals(ball)
     ball._on_body_entered(brick)
-    assert_eq(ball.ball_state, ball.brick_state, "Ball state is not brick_state after colliding with a brick")
     assert_signal_emitted(ball, "score")
     assert_signal_emit_count(ball, "score", 1)
     brick.free()

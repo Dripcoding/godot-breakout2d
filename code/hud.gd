@@ -30,6 +30,7 @@ func _on_ball_out_of_bounds(body:Node2D) -> void:
 
 func on_game_over() -> void:
 	$GameOverLabel.show()
+	$StartGameBtn.show()
 	$ScoreLabel.text = 'Score: 0'
 
 	
@@ -47,3 +48,4 @@ func on_game_start() -> void:
 	$PlayerLivesLabel.text = 'Lives: ' + str(player_lives)
 	$ScoreLabel.text = 'Score: ' + str(score)
 	$StartGameBtn.hide()
+	$GameOverLabel.hide()

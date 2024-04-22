@@ -15,7 +15,6 @@ signal score
 var previous_velocity: Vector2 = Vector2.ZERO
 
 
-const collided_with_brick_resource: Resource = preload("res://code/ball_states/collided_with_brick_state.gd")
 const collided_with_wall_resource: Resource = preload("res://code/ball_states/collided_with_wall_state.gd")
 const out_of_bounds_resource: Resource = preload("res://code/ball_states/out_of_bounds_state.gd")		
 const game_resumed_resource: Resource = preload("res://code/ball_states/game_resumed_state.gd")
@@ -24,7 +23,6 @@ const game_ready_resource: Resource = preload("res://code/ball_states/game_ready
 const game_terminal_resource: Resource = preload("res://code/ball_states/game_terminal_state.gd")
 
 
-var brick_state: CollidedWithBrickState = collided_with_brick_resource.new(brick_collision_rotation)
 var wall_state: CollidedWithWallState = collided_with_wall_resource.new(wall_collision_rotation)
 var out_of_bounds_state: OutOfBoundsState = out_of_bounds_resource.new(
 	position,
@@ -36,11 +34,14 @@ var out_of_bounds_state: OutOfBoundsState = out_of_bounds_resource.new(
 )
 var game_resumed_state: GameResumedState = game_resumed_resource.new(self)
 var game_paused_state: GamePausedState = game_paused_resource.new(self)
-var game_ready_state: GameReadyState = game_ready_resource.new(normal_velocity)
+var game_ready_state: GameReadyState = game_ready_resource.new(self, normal_velocity)
 var game_terminal_state: GameTerminalState = game_terminal_resource.new(position_x_initial, position_y_initial, self)
 
 
 var ball_state = game_ready_state
+var collided_with_brick = false
+var game_started = false
+var game_was_over = false
 
 
 func _ready() -> void:
@@ -66,7 +67,7 @@ func _on_body_entered(body: Node) -> void:
 	if body.is_in_group('brick'):
 		body.queue_free()
 		score.emit()
-		set_state(brick_state)
+		set_collided_with_brick(true)
 	elif body.is_in_group('wall'):
 		set_state(wall_state)
 
@@ -82,7 +83,6 @@ func on_game_over() -> void:
 	game_was_over = true
 
 func on_game_start() -> void:
-	get_parent().get_tree().paused = false
 	set_state(game_ready_state)
 
 
@@ -96,6 +96,16 @@ func resume() -> void:
 
 func quit() -> void:
 	set_state(game_terminal_state)
+	self.set_global_position(Vector2(position_x_initial, position_y_initial))
+	self.set_linear_velocity(Vector2.ZERO)
+	game_was_over = true
+
+
+func reset_position(state: PhysicsDirectBodyState2D) -> void:
+	self.position.x = position_x_initial
+	self.position.y = position_y_initial
+	state.linear_velocity.x = Vector2.ZERO.x
+	state.linear_velocity.y = normal_velocity
 
 
 func set_state(newState) -> void:
@@ -108,3 +118,7 @@ func set_previous_velocity(newVelocity: Vector2) -> void:
 
 func get_previous_velocity() -> Vector2:
 	return previous_velocity
+
+
+func set_collided_with_brick(val: bool) -> void:
+	collided_with_brick = val

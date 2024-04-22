@@ -108,6 +108,32 @@ func test_game_quit():
     assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
     assert_signal_emit_count(hud, "game_over", 1, "Game over signal emitted more than once")
 
+
+func test_start_button_visible_after_game_quit():
+    var hud = get_node("Hud")
+    watch_signals(hud)
+    hud.quit()
+    assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
+
+    var start_game_btn = get_node("Hud/StartGameBtn")
+    assert_not_null(start_game_btn, "Start game button does not exist")
+    assert_true(start_game_btn.visible, "Start game button is not visible")
+
+
+
+func test_start_button_visible_after_game_over():
+    var hud = get_node("Hud")
+    watch_signals(hud)
+    var body = Node2D.new()
+    hud._on_ball_out_of_bounds(body)
+    hud._on_ball_out_of_bounds(body)
+    hud._on_ball_out_of_bounds(body)
+    assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
+
+    var start_game_btn = get_node("Hud/StartGameBtn")
+    assert_not_null(start_game_btn, "Start game button does not exist")
+    assert_true(start_game_btn.visible, "Start game button is not visible")
+
     
 func test_start_button_hidden_on_game_start():
     var hud = get_node("Hud")
