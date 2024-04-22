@@ -49,9 +49,15 @@ func _ready() -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	if !ball_state:
-		return
-	
+	if game_was_over:
+		reset_position(state)
+		game_was_over = false
+
+	if collided_with_brick:
+		var impulse = state.linear_velocity.normalized().rotated(deg_to_rad(brick_collision_rotation)) * normal_velocity
+		state.apply_impulse(impulse)
+		collided_with_brick = false
+		
 	ball_state.handle_physics(state)
 	set_state(game_ready_state)
 
@@ -71,7 +77,9 @@ func _on_ball_out_of_bounds(body: Node2D) -> void:
 
 func on_game_over() -> void:
 	set_state(game_terminal_state)
-
+	self.set_global_position(Vector2(position_x_initial, position_y_initial))
+	self.set_linear_velocity(Vector2.ZERO)
+	game_was_over = true
 
 func on_game_start() -> void:
 	get_parent().get_tree().paused = false
