@@ -9,6 +9,7 @@ signal game_start
 
 
 var score: int = 0
+var highScore: int = 0
 
 
 func _ready() -> void:
@@ -49,3 +50,7 @@ func on_game_start() -> void:
 	$ScoreLabel.text = 'Score: ' + str(score)
 	$StartGameBtn.hide()
 	$GameOverLabel.hide()
+
+
+func _on_utilities_loaded_game_data():
+	$HighScoreLabel.text = 'High Score: ' + str(highScore)

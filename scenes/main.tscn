@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbi1h4bkp4ask"]
+[gd_scene load_steps=13 format=3 uid="uid://dbi1h4bkp4ask"]
 
 [ext_resource type="Script" path="res://code/main.gd" id="1_3mcnq"]
 [ext_resource type="PackedScene" uid="uid://qn1bm7tqvr6p" path="res://scenes/player.tscn" id="2_wluck"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://code/brick_grid.gd" id="8_jo2sc"]
 [ext_resource type="PackedScene" uid="uid://3qjtxier3qqw" path="res://scenes/out_of_bounds_area.tscn" id="8_m6w5o"]
 [ext_resource type="PackedScene" uid="uid://pcd7k6tdewnk" path="res://scenes/hud.tscn" id="10_buwbv"]
+[ext_resource type="Script" path="res://code/saved_game/saved_game_handler.gd" id="11_s4sfu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0pcjc"]
 friction = 0.0
@@ -52,8 +53,12 @@ position = Vector2(32, 708)
 
 [node name="Hud" parent="." instance=ExtResource("10_buwbv")]
 
+[node name="Utilities" type="Node" parent="."]
+script = ExtResource("11_s4sfu")
+
 [connection signal="score" from="Ball" to="Hud" method="_on_ball_score"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Ball" method="_on_ball_out_of_bounds"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="Hud" method="_on_ball_out_of_bounds"]
 [connection signal="game_over" from="Hud" to="." method="_on_game_over"]
 [connection signal="game_start" from="Hud" to="." method="_on_game_start"]
+[connection signal="loaded_game_data" from="Utilities" to="Hud" method="_on_utilities_loaded_game_data"]

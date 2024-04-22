@@ -51,6 +51,14 @@ func test_hud_has_game_over_label():
     assert_eq(game_over_label.text, 'Game Over', "Game over label text is not 'Game Over'")
 
 
+func test_hud_has_high_score_label():
+    var high_score_label = get_node("Hud/HighScoreLabel")
+    assert_not_null(high_score_label, "High score label does not exist")
+    assert_true(high_score_label is Label, "High score label is not a Label")
+    assert_true(high_score_label.visible, "High score label is not visible")
+    assert_eq(high_score_label.text, 'High Score: 0', "High score label text is not 'High Score: 0'")
+
+
 func test_initial_player_lives():
     var hud = get_node("Hud")
     assert_eq(hud.player_lives, 3, "Initial player lives is not 3")

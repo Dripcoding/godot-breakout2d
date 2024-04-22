@@ -44,14 +44,23 @@ text = "Start Game"
 
 [node name="GameOverLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 383.0
-offset_top = 29.0
-offset_right = 556.0
-offset_bottom = 74.0
+offset_left = 235.0
+offset_top = 23.0
+offset_right = 408.0
+offset_bottom = 68.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Game Over"
 horizontal_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 581.0
+offset_top = 22.0
+offset_right = 781.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 32
+text = "High Score: 0"
 
 [connection signal="game_over" from="." to="." method="_on_game_over_signal_received"]
 [connection signal="pressed" from="StartGameBtn" to="." method="_on_start_game_btn_pressed"]
