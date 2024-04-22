@@ -33,7 +33,6 @@ func reset_bricks() -> void:
 
 	for brick in bricks:
 		var new_brick: Node = bricks_scene.instantiate()
-		new_brick.add_to_group('bricks')
 		new_brick.add_to_group('brick')
 		new_brick.position = brick.position
 		self.add_child(new_brick)

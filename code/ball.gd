@@ -64,7 +64,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body.is_in_group('brick') or body.is_in_group('bricks'):
+	if body.is_in_group('brick'):
 		body.queue_free()
 		score.emit()
 		set_collided_with_brick(true)
