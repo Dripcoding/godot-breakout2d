@@ -20,7 +20,6 @@ func load_game():
 
 	if saved_game.player_score:
 		hud.highScore = saved_game.player_score
-		print('high score is ', hud.highScore)
 	loaded_game_data.emit()
 
 

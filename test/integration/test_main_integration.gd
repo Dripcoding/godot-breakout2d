@@ -1,6 +1,5 @@
 extends GutTest
 
-
 var main_scene = load("res://scenes/main.tscn")
 
 
@@ -14,10 +13,11 @@ func after_each():
     var main = get_node("Main")
     var brick_grid = get_node("Main/BrickGrid")
     assert_not_null(brick_grid, "BrickGrid node does not exist")
-    
+
     for brick in brick_grid.bricks:
         brick.free()
-    main.free()
+
+    add_child_autofree(main)
     assert_no_new_orphans()
 
 
@@ -41,7 +41,7 @@ func test_player_pausing_game():
 
     assert_true(ball.ball_state is GameReadyState, "Game should start in ready state")
 
-    var player_position_1 = move_left()    
+    var player_position_1 = move_left()
     pause_game()
     var player_position_2 = move_left()
 
@@ -91,7 +91,7 @@ func test_player_cannot_move_after_quitting_game():
     assert_true(ball.ball_state is GameReadyState, "Game should start in ready state")
 
     quit_game()
-    var player_position_1 = move_left()    
+    var player_position_1 = move_left()
     var player_position_2 = move_left()
     assert_eq(player_position_1, player_position_2, "Player should not move while game is paused")
 
@@ -159,8 +159,10 @@ func test_player_losing_game():
     assert_true(ball.ball_state is GameTerminalState, "Game should be in terminal state")
     assert_signal_emitted(hud, "game_over", "Game over signal not emitted")
     assert_signal_emit_count(hud, "game_over", 1, "Game over signal not emitted once")
-    assert_signal_emitted(out_of_bounds_area, "body_entered", "Body entered signal not emitted") 
-    assert_signal_emit_count(out_of_bounds_area, "body_entered", 3, "Body entered signal not emitted 3 times")
+    assert_signal_emitted(out_of_bounds_area, "body_entered", "Body entered signal not emitted")
+    assert_signal_emit_count(
+        out_of_bounds_area, "body_entered", 3, "Body entered signal not emitted 3 times"
+    )
 
 
 func test_player_cannot_move_after_game_over():
@@ -198,7 +200,7 @@ func test_player_starting_game():
     assert_eq(player_lives_label.text, "Lives: 3", "Player lives label should be visible")
     assert_eq(score_label.text, "Score: 0", "Score label should be visible")
     assert_signal_not_emitted(hud, "game_start", "Game start signal should not be emitted")
-    
+
     start_game_btn.emit_signal("pressed")
 
     assert_false(main.get_tree().paused, "Game should not be paused")
@@ -289,7 +291,7 @@ func move_player_left() -> Vector2:
 
 func collide_with_brick(brick) -> void:
     var ball = get_node("Main/Ball")
-    ball._on_body_entered(brick)
+    ball.emit_signal("body_entered", brick)
 
 
 func collide_with_out_of_bounds_area() -> void:
@@ -301,4 +303,4 @@ func collide_with_out_of_bounds_area() -> void:
 func clear_high_score() -> void:
     var empty_resource = SavedGame.new()
     ResourceSaver.save(empty_resource, "user://saved_game.tres")
-        
+
