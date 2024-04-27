@@ -55,7 +55,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		game_was_over = false
 
 	if collided_with_brick:
-		var impulse = state.linear_velocity.normalized().rotated(deg_to_rad(brick_collision_rotation)) * 350
+		var impulse = state.linear_velocity.normalized().rotated(deg_to_rad(brick_collision_rotation)) * normal_velocity
 		state.apply_impulse(impulse)
 		collided_with_brick = false
 		
@@ -81,7 +81,6 @@ func on_game_over() -> void:
 	self.set_global_position(Vector2(position_x_initial, position_y_initial))
 	self.set_linear_velocity(Vector2.ZERO)
 	game_was_over = true
-	# previous_velocity = Vector2.ZERO
 
 func on_game_start() -> void:
 	set_state(game_ready_state)
