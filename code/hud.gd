@@ -18,7 +18,7 @@ func _on_ball_score() -> void:
 	$ScoreLabel.text = "Score: " + str(score)
 
 
-func _on_ball_out_of_bounds() -> void:
+func _on_ball_out_of_bounds(body: Node2D) -> void:
 	player_lives -= 1
 	$PlayerLivesLabel.text = "Lives: " + str(player_lives)
 

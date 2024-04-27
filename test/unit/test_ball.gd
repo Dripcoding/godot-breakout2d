@@ -90,8 +90,7 @@ func test_ball_out_of_bounds():
 		ball.out_of_bounds_state,
 		"Ball state is not out_of_bounds_state after going out of bounds"
 	)
-	autoqfree(body)
-
+	body.free()
 
 func test_ball_pause():
 	var ball = get_node("Ball")
