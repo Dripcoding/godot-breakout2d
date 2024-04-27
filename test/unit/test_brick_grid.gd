@@ -10,7 +10,8 @@ func before_each():
 
 func after_each():
 	var brick_grid = get_node("BrickGrid")
-	brick_grid.free()
+	autoqfree(brick_grid)
+	assert_no_new_orphans()
 
 
 func test_brick_grid_node_exists():

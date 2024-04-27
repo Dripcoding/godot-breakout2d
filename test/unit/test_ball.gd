@@ -10,7 +10,8 @@ func before_each():
 
 func after_each():
 	var ball = get_node("Ball")
-	ball.free()
+	autoqfree(ball)
+	assert_no_new_orphans()
 
 
 func test_ball_exists():
@@ -60,7 +61,7 @@ func test_ball_collides_with_brick():
 	var brick = Node2D.new()
 	brick.add_to_group("brick")
 	watch_signals(ball)
-	ball._on_body_entered(brick)
+	ball.emit_signal("body_entered", brick)
 	assert_signal_emitted(ball, "score")
 	assert_signal_emit_count(ball, "score", 1)
 	brick.free()
@@ -69,12 +70,15 @@ func test_ball_collides_with_brick():
 func test_ball_collides_with_wall():
 	var ball = get_node("Ball")
 	var wall = Node2D.new()
+	var brick = Node2D.new()
+
 	wall.add_to_group("wall")
-	ball._on_body_entered(wall)
+	ball.emit_signal("body_entered", wall)
 	assert_eq(
 		ball.ball_state, ball.wall_state, "Ball state is not wall_state after colliding with a wall"
 	)
 	wall.free()
+	brick.free()
 
 
 func test_ball_out_of_bounds():
@@ -86,7 +90,7 @@ func test_ball_out_of_bounds():
 		ball.out_of_bounds_state,
 		"Ball state is not out_of_bounds_state after going out of bounds"
 	)
-	body.free()
+	autoqfree(body)
 
 
 func test_ball_pause():

@@ -10,7 +10,8 @@ func before_each():
 
 func after_each():
 	var hud = get_node("Hud")
-	hud.free()
+	autofree(hud)
+	assert_no_new_orphans()
 
 
 func test_hud_exists():
@@ -127,6 +128,7 @@ func test_start_button_visible_after_game_over():
 	var start_game_btn = get_node("Hud/StartGameBtn")
 	assert_not_null(start_game_btn, "Start game button does not exist")
 	assert_true(start_game_btn.visible, "Start game button is not visible")
+	body.free()
 
 
 func test_start_button_hidden_on_game_start():

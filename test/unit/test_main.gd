@@ -16,7 +16,8 @@ func after_each():
 	for brick in brick_grid.bricks:
 		brick.free()
 
-	main.free()
+	autoqfree(main)
+	assert_no_new_orphans()
 
 
 func test_main_exists():

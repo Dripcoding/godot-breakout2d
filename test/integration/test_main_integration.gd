@@ -15,7 +15,8 @@ func after_each():
 
 	for brick in brick_grid.bricks:
 		brick.free()
-	main.free()
+
+	add_child_autofree(main)
 	assert_no_new_orphans()
 
 
@@ -243,7 +244,7 @@ func move_player_left() -> Vector2:
 
 func collide_with_brick(brick) -> void:
 	var ball = get_node("Main/Ball")
-	ball._on_body_entered(brick)
+	ball.emit_signal("body_entered", brick)
 
 
 func collide_with_out_of_bounds_area() -> void:

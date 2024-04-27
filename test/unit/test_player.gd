@@ -10,7 +10,8 @@ func before_each():
 
 func after_each():
 	var player = get_node("Player")
-	player.free()
+	autoqfree(player)
+	assert_no_new_orphans()
 
 
 func test_player_exists():
